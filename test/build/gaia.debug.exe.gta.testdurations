@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Executable>C:\Users\isaka\OneDrive\Skrivbord\programring_project\Private\gaia\test\build\gaia.debug.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>

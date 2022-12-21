@@ -1,0 +1,2 @@
+﻿  pch.cpp
+C:\Users\isaka\OneDrive\Skrivbord\programring_project\Private\gaia\test\sorce\pch.cpp(5,10): fatal  error C1083: Cannot open precompiled header file: 'build\gaia\release\gaia.release.pch': No such file or directory
