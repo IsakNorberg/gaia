@@ -34,6 +34,7 @@
 #folders
 .vs/
 tartarus/tartarus/build/
-test/x64
+test/x64/
+test\build/
 
 
