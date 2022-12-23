@@ -3,5 +3,11 @@
   <Executable>C:\Users\isaka\OneDrive\Skrivbord\programring_project\Private\gaia\test\build\gaia.debug.exe</Executable>
   <TestDurations>
     <TestDuration Test="TestCaseName.TestName" Duration="1" />
+    <TestDuration Test="FirstTest.BasictTests" Duration="1" />
+    <TestDuration Test="BasictTests.FirstTest" Duration="1" />
+    <TestDuration Test="BasictTests.IncludeCorectly" Duration="1" />
+    <TestDuration Test="BasictTests.TestRandom" Duration="1" />
+    <TestDuration Test="GetRandom.CantEnterLesThenOne" Duration="22" />
+    <TestDuration Test="GetRandom.ReturnsSmallerThenOne" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

@@ -21,9 +21,21 @@
     <ClInclude Include="include\tartarus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\dna.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sorce\tartarus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sorce\dna.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sorce\random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

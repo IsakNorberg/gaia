@@ -3,9 +3,11 @@
 #include "tartarus.h"
 #include "framework.h"
 
-// TODO: This is an example of a library function
 
-bool test()
+namespace gaia
 {
-	return true;
+	bool test()
+	{
+		return true;
+	}
 }

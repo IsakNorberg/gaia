@@ -1,4 +1,10 @@
 #pragma once
 
+// All header-files 
+#include "dna.h"
+#include "random.h"
 
-bool test();
+namespace gaia
+{
+	bool test();
+}

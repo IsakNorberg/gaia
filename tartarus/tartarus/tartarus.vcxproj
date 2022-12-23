@@ -19,10 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\dna.h" />
     <ClInclude Include="include\framework.h" />
+    <ClInclude Include="include\random.h" />
     <ClInclude Include="include\tartarus.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="sorce\random.cpp" />
+    <ClCompile Include="sorce\dna.cpp" />
     <ClCompile Include="sorce\tartarus.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
