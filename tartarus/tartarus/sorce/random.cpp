@@ -3,7 +3,7 @@
 namespace gaia
 {
 	
-	float getRandom(unsigned int precision)
+	float get_Random_Range_Normalized(unsigned int precision) noexcept
 	{
 		assert(precision > 0);
 		static time_t t = 0;

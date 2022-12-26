@@ -6,7 +6,7 @@
 
 namespace gaia
 {
-	bool test()
+	bool test() noexcept
 	{
 		return true;
 	}

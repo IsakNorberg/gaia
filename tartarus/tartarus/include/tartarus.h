@@ -3,8 +3,9 @@
 // All header-files 
 #include "dna.h"
 #include "random.h"
+#include "dynamicdna.h"
 
 namespace gaia
 {
-	bool test();
+	bool test() noexcept;
 }

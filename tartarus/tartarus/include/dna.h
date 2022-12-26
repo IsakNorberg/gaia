@@ -1,24 +1,28 @@
 #pragma once
 #include <vector>
+#include <algorithm>
+#include <ranges>
 
+#include "random.h"
 using  vectorOfFlots = std::vector<float>;
 
 namespace gaia
 {
 	//Use to create a Dna
-	struct BluePrint
+	struct DanBluePrint
 	{
-		int _dnaSize;
-		int _precision;
+		unsigned int _dnaSize;
+		unsigned int _precision;
 	};
-
+	//Genes from -1 to 1
 	class Dna
 	{
 		int _precision;
 
 		vectorOfFlots _data;
 	public:
-		Dna(BluePrint bluePrint);
+		Dna(DanBluePrint bluePrint);
+		size_t size() noexcept;
 	};
 }
 
