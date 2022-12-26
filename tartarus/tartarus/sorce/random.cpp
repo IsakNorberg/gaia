@@ -10,7 +10,7 @@ namespace gaia
 		srand(static_cast<int>(time(&t)));
 		++t;
 		float randomOut  =  static_cast<float>(rand() % precision * 2); // to get negative numbers 
-		randomOut = randomOut - precision;         //
+		randomOut = randomOut - precision;         // to get negative numbers 
 		randomOut = randomOut / precision;
 		return randomOut;
 	}
