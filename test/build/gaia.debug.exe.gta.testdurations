@@ -7,8 +7,11 @@
     <TestDuration Test="BasictTests.FirstTest" Duration="1" />
     <TestDuration Test="BasictTests.IncludeCorectly" Duration="1" />
     <TestDuration Test="BasictTests.TestRandom" Duration="1" />
-    <TestDuration Test="GetRandom.CantEnterLesThenOne" Duration="18" />
+    <TestDuration Test="GetRandom.CantEnterLesThenOne" Duration="16" />
     <TestDuration Test="GetRandom.ReturnsSmallerThenOne" Duration="1" />
     <TestDuration Test="ObjectDna.SetsUpToCorrectSize" Duration="1" />
+    <TestDuration Test="NormalizedIndevidual.SetsUpToCorrectSize" Duration="1" />
+    <TestDuration Test="TestDynamicIndividualBluePrint.CantMakeUtilizationBiggerThenCompletSetIfUnique" Duration="36" />
+    <TestDuration Test="TestDynamicIndividualBluePrint.CanMakeUtilizationBiggerThenCompletSetRepeatable" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

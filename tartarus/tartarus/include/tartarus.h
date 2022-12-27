@@ -1,9 +1,9 @@
 #pragma once
 
 // All header-files 
-#include "dna.h"
+#include "normalizedIndividual.h"
 #include "random.h"
-#include "dynamicdna.h"
+#include "dynamicIndividual.h"
 
 namespace gaia
 {

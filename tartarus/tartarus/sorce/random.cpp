@@ -3,7 +3,7 @@
 namespace gaia
 {
 	
-	float get_Random_Range_Normalized(unsigned int precision) noexcept
+	float get_random_range_normalized(unsigned int precision) noexcept
 	{
 		assert(precision > 0);
 		static time_t t = 0;
@@ -13,6 +13,14 @@ namespace gaia
 		randomOut = randomOut - precision;         // to get negative numbers 
 		randomOut = randomOut / precision;
 		return randomOut;
+	}
+
+	unsigned int get_random_repeatable(unsigned int utilization) noexcept
+	{
+		static time_t t = 0;
+		srand(static_cast<int>(time(&t)));
+		++t;
+		return static_cast<unsigned int>(rand() % utilization);;
 	}
 
 }
