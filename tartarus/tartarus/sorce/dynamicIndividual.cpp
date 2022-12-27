@@ -6,7 +6,7 @@ gaia::DynamicIndividual::DynamicIndividual(DynamicIndividualBluePrint bluePrint)
 
 	std::ranges::for_each(_dna, [&](auto& gene)
 	{
-		gene = bluePrint._completSet[get_random_repeatable(bluePrint._utilization)];
+		gene = bluePrint._completSet.at(get_random_repeatable(bluePrint._utilization));
 	});
 }
 
