@@ -30,7 +30,7 @@ namespace gaia
 	public:
 		NormalizedIndividual(NormalizedIndividualBluePrint bluePrint);
 		size_t size() noexcept;
-		
+		float at(unsigned int index);
 		vectorOfFlots::iterator begin()noexcept;
 		vectorOfFlots::iterator end()noexcept;
 	};

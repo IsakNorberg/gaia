@@ -16,6 +16,12 @@ size_t gaia::NormalizedIndividual::size() noexcept
 	return _dna.size();
 }
 
+float gaia::NormalizedIndividual::at(unsigned int index)
+{
+	assert(_dna.size() > index);
+	return _dna.at(index);
+}
+
 vectorOfFlots::iterator gaia::NormalizedIndividual::begin() noexcept
 {
 	return _dna.begin();

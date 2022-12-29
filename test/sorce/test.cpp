@@ -61,12 +61,14 @@ namespace gaia
 		{
 			std::vector<int> test = { 4,9,3,7 };
 			auto test1 = DynamicIndividualBluePrint(Repeatability::Repeatable, 5, test);
+			
 			EXPECT_TRUE(test1._completSet.size() == test.size());
 		}
 		TEST(TestDynamicIndividual, TheSizeIsCorrect)
 		{
 			std::vector<int> test = { 4,9,3,7,4 };
-			auto test1 = DynamicIndividualBluePrint<int>(Repeatability::Repeatable, 5, test);
+			 
+			auto test1 = DynamicIndividualBluePrint(Repeatability::Repeatable, 5, test);
 			DynamicIndividual<int> dynamic(test1);
 			EXPECT_EQ(test.size(), dynamic.size());
 		}

@@ -4,6 +4,7 @@
 #include <ranges>
 #include <algorithm>
 #include <assert.h>
+#include <typeinfo>
 
 #include "random.h"
 
@@ -24,7 +25,9 @@ namespace gaia
 		unsigned int _utilization;
 		std::vector<DNAType> _completSet;
 		DynamicIndividualBluePrint(Repeatability attribute, unsigned int utilization, std::vector<DNAType> completSet);
+		DNAType type();
 	};
+
 	template <typename DNAType>
 	gaia::DynamicIndividualBluePrint<DNAType>::DynamicIndividualBluePrint(Repeatability attribute,
 																		  unsigned int utilization,
@@ -34,6 +37,12 @@ namespace gaia
 		{
 			assert(_completSet.size() >= _utilization);
 		}
+	}
+
+	template<typename DNAType>
+	inline DNAType DynamicIndividualBluePrint<DNAType>::type() 
+	{
+		return DNAType;
 	}
 
 	//Genes that can be anything in any range
@@ -47,11 +56,13 @@ namespace gaia
 		size_t size() noexcept;
 		
 		DNAType at(unsigned int index);
+		std::vector<DNAType>::iterator begin()noexcept;
+		std::vector<DNAType>::iterator end()noexcept;
 	};
+
 	template<typename DNAType, typename BluePrint>
 	gaia::DynamicIndividual<DNAType, BluePrint>::DynamicIndividual(BluePrint bluePrint)
 	{
-
 		_dna.resize(bluePrint._utilization);
 		const unsigned int utilization = bluePrint._utilization;
 		std::vector<DNAType> completSet = bluePrint._completSet;
@@ -81,6 +92,18 @@ namespace gaia
 	{
 		assert(_dna.size() > index);
 		return  _dna.at(index);
+	}
+
+	template<typename DNAType, typename BluePrint>
+	inline std::vector<DNAType>::iterator DynamicIndividual<DNAType, BluePrint>::begin() noexcept
+	{
+		return _dna.begin();
+	}
+
+	template<typename DNAType, typename BluePrint>
+	inline std::vector<DNAType>::iterator DynamicIndividual<DNAType, BluePrint>::end() noexcept
+	{
+		return _dna.end();
 	}
 	
 }

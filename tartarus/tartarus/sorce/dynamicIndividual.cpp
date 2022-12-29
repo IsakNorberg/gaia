@@ -1,7 +1,3 @@
 #include "dynamicIndividual.h"
 
 
-
-
-
-
