@@ -20,7 +20,12 @@ namespace gaia
 		static time_t t = 0;
 		srand(static_cast<int>(time(&t)));
 		++t;
-		return static_cast<unsigned int>(rand() % utilization);;
+		return static_cast<unsigned int>(rand() % utilization);
+	}
+
+	unsigned int get_random_unique(unsigned int utilization)
+	{
+		return utilization -1;
 	}
 
 }

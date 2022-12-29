@@ -7,11 +7,20 @@
     <TestDuration Test="BasictTests.FirstTest" Duration="1" />
     <TestDuration Test="BasictTests.IncludeCorectly" Duration="1" />
     <TestDuration Test="BasictTests.TestRandom" Duration="1" />
-    <TestDuration Test="GetRandom.CantEnterLesThenOne" Duration="16" />
+    <TestDuration Test="GetRandom.CantEnterLesThenOne" Duration="17" />
     <TestDuration Test="GetRandom.ReturnsSmallerThenOne" Duration="1" />
     <TestDuration Test="ObjectDna.SetsUpToCorrectSize" Duration="1" />
     <TestDuration Test="NormalizedIndevidual.SetsUpToCorrectSize" Duration="1" />
-    <TestDuration Test="TestDynamicIndividualBluePrint.CantMakeUtilizationBiggerThenCompletSetIfUnique" Duration="36" />
+    <TestDuration Test="TestDynamicIndividualBluePrint.CantMakeUtilizationBiggerThenCompletSetIfUnique" Duration="34" />
     <TestDuration Test="TestDynamicIndividualBluePrint.CanMakeUtilizationBiggerThenCompletSetRepeatable" Duration="1" />
+    <TestDuration Test="NormalizedIndevidual.AllNumbersSetUp" Duration="1" />
+    <TestDuration Test="GetRandom.ReturnsBiggerThenMinusOne" Duration="1" />
+    <TestDuration Test="GetNormalizedRandom.CantEnterLesThenOne" Duration="18" />
+    <TestDuration Test="GetNormalizedRandom.ReturnsSmallerThenOne" Duration="1" />
+    <TestDuration Test="GetNormalizedRandom.ReturnsBiggerThenMinusOne" Duration="1" />
+    <TestDuration Test="TestDynamicIndividual.TheSizeIsCorrect" Duration="1" />
+    <TestDuration Test="TestDynamicIndividual.IsCorrectTyp" Duration="1" />
+    <TestDuration Test="TestDynamicIndividual.CantAtBigerThenDNASize" Duration="19" />
+    <TestDuration Test="TestDynamicIndividual.IsCorrectValue" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

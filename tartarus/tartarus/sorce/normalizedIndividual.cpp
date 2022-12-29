@@ -15,4 +15,16 @@ size_t gaia::NormalizedIndividual::size() noexcept
 {
 	return _dna.size();
 }
+
+vectorOfFlots::iterator gaia::NormalizedIndividual::begin() noexcept
+{
+	return _dna.begin();
+}
+
+vectorOfFlots::iterator gaia::NormalizedIndividual::end() noexcept
+{
+	return _dna.end();
+}
+
+
  
