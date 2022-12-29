@@ -12,7 +12,7 @@ namespace gaia
 			EXPECT_TRUE(test());
 		}
 	}
-	namespace Random
+	namespace Random////////////////////////////////////////////////
 	{
 		TEST(GetNormalizedRandom, CantEnterLesThenOne)
 		{
@@ -35,7 +35,7 @@ namespace gaia
 
 		}
 	}
-	namespace Indevidual
+	namespace Indevidual//////////////////////////////////////////////////
 	{
 		TEST(NormalizedIndevidual, SetsUpToCorrectSize)
 		{
@@ -49,6 +49,16 @@ namespace gaia
 			{
 				EXPECT_TRUE(gene < 1.1f && gene > -1.1f);
 			});
+		}
+		TEST(NormalizedIndevidual, CantAtOutSisdeOfDNASize)
+		{
+			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,20, 100 });
+			EXPECT_DEATH(dnaTest.at(20), "");
+		}
+		TEST(NormalizedIndevidual, CanATSmallerThenDNASIze)
+		{
+			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,20, 100 });
+			EXPECT_TRUE(dnaTest.at(3) > -1.1);
 		}
 		TEST(TestDynamicIndividualBluePrint, CantMakeUtilizationBiggerThenCompletSetIfUnique)
 		{
@@ -87,5 +97,17 @@ namespace gaia
 			DynamicIndividual dynamic(test1);
 			EXPECT_DEATH(dynamic.at(5),"");
 		}
+		TEST(TestDynamicIndividual, AlNumbersAreSetUp)
+		{
+			std::vector<int> test = { 4,9,3,7,4,7,5 };
+			auto test1 = DynamicIndividualBluePrint(Repeatability::Repeatable, 5, test);
+			DynamicIndividual dynamic(test1);
+			std::for_each(dynamic.begin(), dynamic.end(), [&](auto gene)
+			{
+				EXPECT_TRUE(gene > 3);
+				EXPECT_TRUE(gene < 10);
+			});
+		}
+
 	}
 }
