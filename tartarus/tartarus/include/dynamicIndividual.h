@@ -61,20 +61,11 @@ namespace gaia
 		_dna.resize(bluePrint._utilization);
 		const unsigned int utilization = bluePrint._utilization;
 		std::vector<DNAType> completSet = bluePrint._completSet;
-		if (bluePrint._attribute == Repeatability::Repeatable)
+		std::ranges::for_each(_dna, [&](auto& gene)
 		{
-			std::ranges::for_each(_dna, [&](auto& gene)
-			{
-				gene = completSet.at(get_random_repeatable(utilization));
-			});
-		}
-		else if (bluePrint._attribute == Repeatability::Unique)
-		{
-			std::ranges::for_each(_dna, [&](auto& gene)
-			{
-				gene = completSet.at(get_random_unique(utilization));
-			});
-		}
+			gene = completSet.at(get_Random(bluePrint._attribute,utilization));
+		});
+
 	}
 	template<typename DNAType>
 	size_t gaia::DynamicIndividual<DNAType>::size() noexcept
@@ -100,5 +91,6 @@ namespace gaia
 	{
 		return _dna.end();
 	}
-	
+
+	int get_Random(Repeatability attribute, unsigned int utilization);
 }

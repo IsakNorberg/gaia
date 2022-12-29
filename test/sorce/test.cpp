@@ -20,17 +20,17 @@ namespace gaia
 		}
 		TEST(GetNormalizedRandom, ReturnsSmallerThenOne)
 		{
-			EXPECT_TRUE(1.0f > get_random_range_normalized(100));
-			EXPECT_TRUE(1.0f > get_random_range_normalized(1000));
-			EXPECT_TRUE(1.0f > get_random_range_normalized(10000));
+			EXPECT_TRUE(1.1f > get_random_range_normalized(100));
+			EXPECT_TRUE(1.1f > get_random_range_normalized(1000));
+			EXPECT_TRUE(1.1f > get_random_range_normalized(10000));
 			EXPECT_TRUE(1.1f > get_random_range_normalized(1));
 
 		}
 		TEST(GetNormalizedRandom, ReturnsBiggerThenMinusOne)
 		{
-			EXPECT_TRUE(-1.0f < get_random_range_normalized(100));
-			EXPECT_TRUE(-1.0f < get_random_range_normalized(1000));
-			EXPECT_TRUE(-1.0f < get_random_range_normalized(10000));
+			EXPECT_TRUE(-1.1f < get_random_range_normalized(100));
+			EXPECT_TRUE(-1.1f < get_random_range_normalized(1000));
+			EXPECT_TRUE(-1.1f < get_random_range_normalized(10000));
 			EXPECT_TRUE(-1.1f < get_random_range_normalized(1));
 
 		}
@@ -76,11 +76,16 @@ namespace gaia
 		}
 		TEST(TestDynamicIndividual, TheSizeIsCorrect)
 		{
-			std::vector<int> test = { 4,9,3,7,4 };
-			 
-			auto test1 = DynamicIndividualBluePrint(Repeatability::Repeatable, 5, test);
+			std::vector<int> test = { 4,9,3,7,4,5,9,55 };
+			
+			auto test1 = DynamicIndividualBluePrint(Repeatability::Repeatable, 6, test);
 			DynamicIndividual dynamic(test1);
-			EXPECT_EQ(test.size(), dynamic.size());
+			EXPECT_EQ(6, dynamic.size());
+			std::vector<int> test2= { 4,9,3,7,4 };
+
+			auto test3 = DynamicIndividualBluePrint(Repeatability::Repeatable, 5, test2);
+			DynamicIndividual dynamic1(test3);
+			EXPECT_EQ(5, dynamic1.size());
 		}
 		TEST(TestDynamicIndividual, IsCorrectValue)
 		{
@@ -88,7 +93,7 @@ namespace gaia
 			auto test1 = DynamicIndividualBluePrint<int>(Repeatability::Repeatable, 5, test);
 			DynamicIndividual dynamic(test1);
 			
-			EXPECT_TRUE(dynamic.at(2)> 3);
+			EXPECT_TRUE(dynamic.at(2)> 2);
 		}
 		TEST(TestDynamicIndividual, CantAtBigerThenDNASize)
 		{
@@ -104,7 +109,7 @@ namespace gaia
 			DynamicIndividual dynamic(test1);
 			std::for_each(dynamic.begin(), dynamic.end(), [&](auto gene)
 			{
-				EXPECT_TRUE(gene > 3);
+				EXPECT_TRUE(gene > 2);
 				EXPECT_TRUE(gene < 10);
 				EXPECT_TRUE(gene < 100);
 			});
