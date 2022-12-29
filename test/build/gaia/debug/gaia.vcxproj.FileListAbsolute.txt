@@ -1,3 +1,0 @@
-C:\Users\isaka\OneDrive\Skrivbord\programring_project\Private\gaia\test\build\gaia\debug\gaia.vcxproj.CopyComplete
-C:\Users\isaka\OneDrive\Skrivbord\programring_project\Private\gaia\test\build\gtest.pdb
-C:\Users\isaka\OneDrive\Skrivbord\programring_project\Private\gaia\test\build\gtest_main.pdb
