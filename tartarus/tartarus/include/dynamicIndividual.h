@@ -4,9 +4,10 @@
 #include <ranges>
 #include <algorithm>
 #include <assert.h>
-#include <typeinfo>
+#include <memory>
 
 #include "random.h"
+
 
 
 namespace gaia
@@ -25,7 +26,6 @@ namespace gaia
 		unsigned int _utilization;
 		std::vector<DNAType> _completSet;
 		DynamicIndividualBluePrint(Repeatability attribute, unsigned int utilization, std::vector<DNAType> completSet);
-		DNAType type();
 	};
 
 	template <typename DNAType>
@@ -39,20 +39,15 @@ namespace gaia
 		}
 	}
 
-	template<typename DNAType>
-	inline DNAType DynamicIndividualBluePrint<DNAType>::type() 
-	{
-		return DNAType;
-	}
 
 	//Genes that can be anything in any range
-	template <typename DNAType, typename BluePrint = DynamicIndividualBluePrint<DNAType>>
+	template <typename DNAType>
 	class DynamicIndividual
-	{
+	{	
 		std::vector<DNAType> _dna;
 	public:
 
-		DynamicIndividual(BluePrint bluePrint);
+		DynamicIndividual(DynamicIndividualBluePrint<DNAType> bluePrint);
 		size_t size() noexcept;
 		
 		DNAType at(unsigned int index);
@@ -60,8 +55,8 @@ namespace gaia
 		std::vector<DNAType>::iterator end()noexcept;
 	};
 
-	template<typename DNAType, typename BluePrint>
-	gaia::DynamicIndividual<DNAType, BluePrint>::DynamicIndividual(BluePrint bluePrint)
+	template<typename DNAType>
+	gaia::DynamicIndividual<DNAType>::DynamicIndividual(DynamicIndividualBluePrint<DNAType> bluePrint)
 	{
 		_dna.resize(bluePrint._utilization);
 		const unsigned int utilization = bluePrint._utilization;
@@ -81,27 +76,27 @@ namespace gaia
 			});
 		}
 	}
-	template<typename DNAType, typename BluePrint>
-	size_t gaia::DynamicIndividual<DNAType, BluePrint>::size() noexcept
+	template<typename DNAType>
+	size_t gaia::DynamicIndividual<DNAType>::size() noexcept
 	{
 		return _dna.size();
 	}
 
-	template<typename DNAType, typename BluePrint>
-	DNAType gaia::DynamicIndividual<DNAType, BluePrint>::at(unsigned int index)
+	template<typename DNAType>
+	DNAType gaia::DynamicIndividual<DNAType>::at(unsigned int index)
 	{
 		assert(_dna.size() > index);
 		return  _dna.at(index);
 	}
 
-	template<typename DNAType, typename BluePrint>
-	inline std::vector<DNAType>::iterator DynamicIndividual<DNAType, BluePrint>::begin() noexcept
+	template<typename DNAType>
+	inline std::vector<DNAType>::iterator DynamicIndividual<DNAType>::begin() noexcept
 	{
 		return _dna.begin();
 	}
 
-	template<typename DNAType, typename BluePrint>
-	inline std::vector<DNAType>::iterator DynamicIndividual<DNAType, BluePrint>::end() noexcept
+	template<typename DNAType>
+	inline std::vector<DNAType>::iterator DynamicIndividual<DNAType>::end() noexcept
 	{
 		return _dna.end();
 	}

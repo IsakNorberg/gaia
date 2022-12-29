@@ -69,7 +69,7 @@ namespace gaia
 			std::vector<int> test = { 4,9,3,7,4 };
 			 
 			auto test1 = DynamicIndividualBluePrint(Repeatability::Repeatable, 5, test);
-			DynamicIndividual<int> dynamic(test1);
+			DynamicIndividual dynamic(test1);
 			EXPECT_EQ(test.size(), dynamic.size());
 		}
 		TEST(TestDynamicIndividual, IsCorrectValue)
