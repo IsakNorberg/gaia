@@ -106,6 +106,7 @@ namespace gaia
 			{
 				EXPECT_TRUE(gene > 3);
 				EXPECT_TRUE(gene < 10);
+				EXPECT_TRUE(gene < 100);
 			});
 		}
 
