@@ -76,15 +76,15 @@ namespace gaia
 		{
 			std::vector<int> test = { 4,9,3,7,4 };
 			auto test1 = DynamicIndividualBluePrint<int>(Repeatability::Repeatable, 5, test);
-			DynamicIndividual<int> dynamic(test1);
+			DynamicIndividual dynamic(test1);
 			
 			EXPECT_TRUE(dynamic.at(2)> 3);
 		}
 		TEST(TestDynamicIndividual, CantAtBigerThenDNASize)
 		{
 			std::vector<int> test = { 4,9,3,7,4 };
-			auto test1 = DynamicIndividualBluePrint<int>(Repeatability::Repeatable, 5, test);
-			DynamicIndividual<int> dynamic(test1);
+			auto test1 = DynamicIndividualBluePrint(Repeatability::Repeatable, 5, test);
+			DynamicIndividual dynamic(test1);
 			EXPECT_DEATH(dynamic.at(5),"");
 		}
 	}
