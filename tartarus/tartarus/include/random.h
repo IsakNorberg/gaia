@@ -2,6 +2,8 @@
 #include <assert.h>
 #include <time.h>
 #include <cstdlib>
+#include <vector>
+#include <algorithm>
 
 namespace gaia
 {
