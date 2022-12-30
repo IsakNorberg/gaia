@@ -29,6 +29,7 @@ namespace gaia
 		int _precision;
 		float _fitness; //TODO: get end set
 		vectorOfFlots _dna;
+		//Vector of intes set pu TODO: is the brain conactoons 
 	public:
 		NormalizedIndividual(NormalizedIndividualBluePrint bluePrint);
 		size_t size()noexcept;

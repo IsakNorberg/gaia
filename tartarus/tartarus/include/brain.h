@@ -12,7 +12,7 @@ namespace gaia
 	{
 		// tack blue orint in constructor 
 		// mby normalezed indevidual  
-
+		// vecrtor of vector of lots
 		// vector<flot> outpuit 
 		// or unsind int as a index as put pot as the bigest valu 
 	};
