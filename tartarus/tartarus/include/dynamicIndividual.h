@@ -45,6 +45,7 @@ namespace gaia
 	class DynamicIndividual
 	{	
 		std::vector<DNAType> _dna;
+		float _fitness; //TODO: get end set
 	public:
 
 		DynamicIndividual(DynamicIndividualBluePrint<DNAType> bluePrint);

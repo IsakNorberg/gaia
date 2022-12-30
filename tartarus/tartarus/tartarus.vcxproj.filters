@@ -30,6 +30,12 @@
     <ClInclude Include="include\dynamicIndividual.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\population.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\brain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sorce\tartarus.cpp">

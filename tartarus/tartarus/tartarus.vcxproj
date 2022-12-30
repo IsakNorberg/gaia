@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\brain.h" />
+    <ClInclude Include="include\population.h" />
     <ClInclude Include="include\normalizedIndividual.h" />
     <ClInclude Include="include\dynamicIndividual.h" />
     <ClInclude Include="include\framework.h" />

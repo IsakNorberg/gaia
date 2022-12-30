@@ -11,7 +11,7 @@ namespace gaia
 	enum class Negativity // implematera
 	{
 		NagativAndPositive,
-		Positive
+		Positive  //TODO: make so this woarks
 	};
 
 	//Use to create a Dna
@@ -21,11 +21,13 @@ namespace gaia
 		unsigned int _dnaSize;
 		unsigned int _precision;
 	};
+	//TODO: Only Made In Braine
+
 	//Genes that are normalized
 	class NormalizedIndividual
 	{
 		int _precision;
-
+		float _fitness; //TODO: get end set
 		vectorOfFlots _dna;
 	public:
 		NormalizedIndividual(NormalizedIndividualBluePrint bluePrint);
