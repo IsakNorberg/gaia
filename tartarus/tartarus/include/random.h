@@ -17,9 +17,9 @@ namespace gaia
 	{
 		inline void seed() noexcept
 		{
-			srand(static_cast<int>(time(0)));
+			srand(static_cast<int>(time(nullptr)));
 		}
-		inline auto random(unsigned int i) noexcept
+		inline auto random(unsigned int i)  noexcept 
 		{
 			static bool once = true;
 			if(once)

@@ -29,10 +29,12 @@ namespace gaia
 		vectorOfFlots _dna;
 	public:
 		NormalizedIndividual(NormalizedIndividualBluePrint bluePrint);
-		size_t size() noexcept;
+		size_t size()noexcept;
 		float at(unsigned int index);
+		
 		vectorOfFlots::iterator begin()noexcept;
 		vectorOfFlots::iterator end()noexcept;
+		
 	};
 }
 

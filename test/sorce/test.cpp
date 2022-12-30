@@ -1,8 +1,7 @@
 #include "pch.h"
 
-#include <type_traits>
-
 #include "tartarus.h"
+#include <algorithm>
 namespace gaia
 {
 	namespace Bacic
@@ -34,6 +33,29 @@ namespace gaia
 			EXPECT_TRUE(-1.1f < get_random_range_normalized(1));
 
 		}
+		TEST(GetRandomUnique, TheNumbersAreUniqe)
+		{
+			int s = 8;
+			std::vector<int> vector;
+			vector.resize(s);
+			std::for_each(vector.begin(), vector.end(), [&](int& num)
+			{
+				num = get_random_unique(static_cast<int>(vector.size()));
+			});
+			std::for_each(vector.begin(), vector.end(), [&](int num)
+			{
+				int once = 0;
+				auto it = std::find_if(vector.begin(), vector.end(), [num, &once](int v)
+				{
+					if (v == num)
+					{
+						++once;
+					}
+					return once > 1;
+				});
+				EXPECT_TRUE(it == vector.end());
+			});
+		}
 	}
 	namespace Indevidual//////////////////////////////////////////////////
 	{
@@ -41,6 +63,11 @@ namespace gaia
 		{
 			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,20, 10 });
 			EXPECT_EQ(dnaTest.size(), 20);
+		}
+		TEST(NormalizedIndevidual, HandelZero)
+		{
+			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,0, 0 });
+			EXPECT_EQ(dnaTest.size(), 0);
 		}
 		TEST(NormalizedIndevidual, AllNumbersSetUp)
 		{
@@ -114,6 +141,27 @@ namespace gaia
 				EXPECT_TRUE(gene < 100);
 			});
 		}
-
+		TEST(TestDynamicIndividual, UniqeDNAAllNumbersSetUP)
+		{
+			std::vector<int> test = { 1,2,-5,0,4,11,9,14 };
+			auto test1 = DynamicIndividualBluePrint(Repeatability::Unique, 8, test);
+			DynamicIndividual dynamic(test1);
+			std::for_each(dynamic.begin(), dynamic.end(), [&](auto gene)
+			{
+				EXPECT_TRUE(gene > -6);
+				EXPECT_TRUE(gene < 15);
+			});
+		}
+		TEST(TestDynamicIndividual, UniqeDNAHandelZero)
+		{
+			std::vector<int> test = { 1,2,-5,0,4,11,9,14 };
+			auto test1 = DynamicIndividualBluePrint(Repeatability::Unique, 0, test);
+			DynamicIndividual dynamic(test1);
+			std::for_each(dynamic.begin(), dynamic.end(), [&](auto gene)
+			{
+				EXPECT_TRUE(gene > -6);
+				EXPECT_TRUE(gene < 15);
+			});
+		}
 	}
 }

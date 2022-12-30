@@ -51,8 +51,9 @@ namespace gaia
 		size_t size() noexcept;
 		
 		DNAType at(unsigned int index);
-		std::vector<DNAType>::iterator begin()noexcept;
-		std::vector<DNAType>::iterator end()noexcept;
+
+	    std::vector<DNAType>::iterator begin()  noexcept;
+		std::vector<DNAType>::iterator end() noexcept;
 	};
 
 	template<typename DNAType>
@@ -87,7 +88,7 @@ namespace gaia
 	}
 
 	template<typename DNAType>
-	inline std::vector<DNAType>::iterator DynamicIndividual<DNAType>::end() noexcept
+	inline  std::vector<DNAType>::iterator DynamicIndividual<DNAType>::end() noexcept
 	{
 		return _dna.end();
 	}

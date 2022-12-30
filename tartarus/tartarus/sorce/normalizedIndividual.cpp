@@ -32,5 +32,4 @@ vectorOfFlots::iterator gaia::NormalizedIndividual::end() noexcept
 	return _dna.end();
 }
 
-
  
