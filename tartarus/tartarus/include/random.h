@@ -10,8 +10,9 @@ namespace gaia
 	//normalized
 	//Get a random float between -1 and 1 with a given precision
 	float get_random_range_normalized(unsigned  int precision) noexcept;
-	unsigned int get_random_repeatable(unsigned int utilization) noexcept;
+	unsigned int get_random_repeatable(unsigned int range) noexcept;
 	unsigned int get_random_unique(unsigned int utilization);
+	float get_random_range_normalized_posetiv(unsigned  int precision) noexcept;
 
 	namespace
 	{
@@ -19,7 +20,7 @@ namespace gaia
 		{
 			srand(static_cast<int>(time(nullptr)));
 		}
-		inline auto random(unsigned int i)  noexcept 
+		inline auto random(unsigned int range)  noexcept 
 		{
 			static bool once = true;
 			if(once)
@@ -27,7 +28,7 @@ namespace gaia
 				seed();
 				once = false;
 			}
-			return rand() % i;
+			return rand() % range;
 		}
 		
 	}

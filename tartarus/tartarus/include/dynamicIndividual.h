@@ -53,6 +53,9 @@ namespace gaia
 		
 		DNAType at(unsigned int index);
 
+		float get_fitness() const noexcept;
+		void set_fitness(float fitness)noexcept;
+
 	    std::vector<DNAType>::iterator begin()  noexcept;
 		std::vector<DNAType>::iterator end() noexcept;
 	};
@@ -80,6 +83,18 @@ namespace gaia
 	{
 		assert(_dna.size() > index);
 		return  _dna.at(index);
+	}
+
+	template<typename DNAType>
+	inline float DynamicIndividual<DNAType>::get_fitness() const noexcept
+	{
+		return _fitness;
+	}
+
+	template<typename DNAType>
+	inline void DynamicIndividual<DNAType>::set_fitness(float fitness) noexcept
+	{
+		_fitness = fitness;
 	}
 
 	template<typename DNAType>
