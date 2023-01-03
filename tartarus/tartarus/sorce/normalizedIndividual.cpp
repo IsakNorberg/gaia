@@ -12,6 +12,7 @@ gaia::NormalizedIndividual::NormalizedIndividual(NormalizedIndividualBluePrint b
 	NodeSetUp n = nodeSetUp; // ta bort ville bra kunna bugga 
 	// kolla node set upp bär brain
 	// set upp fö resten av dna för hjärnan
+	// och skrive några test för postivt dna och get och set
 }
 
 gaia::NormalizedIndividual::NormalizedIndividual(NormalizedIndividualBluePrint bluePrint)
