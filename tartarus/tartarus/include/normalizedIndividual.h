@@ -15,24 +15,10 @@ namespace gaia
 		NagativAndPositive,
 		Positive 
 	};
-	namespace
-	{
-		inline float random(unsigned int precition, Negativity atribute) noexcept
-		{
-			if (atribute == Negativity::NagativAndPositive)
-			{
-				return  get_random_range_normalized(precition);
-			}
-			else if (atribute == Negativity::Positive)
-			{
-				return  get_random_range_normalized_posetiv(precition);
-			}
-			assert(!"");
-			return .0f;
-		}
-	}
+	
 	struct NodeSetUp
 	{
+		NodeSetUp(unsigned int inputNodeAmount, unsigned int hiddenNodeAmountPerLayers, unsigned int hiddenNodeLayers, unsigned int outputNodeAmount);
 		unsigned int _inputNodeAmount{0};
 		unsigned int _hiddenNodeAmountPerLayers{0};
 		unsigned int _hiddenNodeLayers{0};
@@ -53,6 +39,7 @@ namespace gaia
 		int _precision{0};
 		float _fitness{0};
 		vectorOfFlots _dna;
+		void initialize(NormalizedIndividualBluePrint bluePrint, NodeSetUp nodeSetUp);
 		//Vector of intes set pu TODO: is the brain conactoons 
 	public:
 	

@@ -64,6 +64,11 @@ namespace gaia
 			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,20, 10 });
 			EXPECT_EQ(dnaTest.size(), 20);
 		}
+		TEST(NormalizedIndevidual, SetsUpToCorrectSizePosetiv)
+		{
+			NormalizedIndividual dnaTest({ Negativity::Positive ,20, 10 });
+			EXPECT_EQ(dnaTest.size(), 20);
+		}
 		TEST(NormalizedIndevidual, HandelZero)
 		{
 			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,0, 0 });
@@ -75,6 +80,14 @@ namespace gaia
 			std::for_each(dnaTest.begin(), dnaTest.end(), [](float gene)
 			{
 				EXPECT_TRUE(gene < 1.1f && gene > -1.1f);
+			});
+		}
+		TEST(NormalizedIndevidual, AllNumbersSetUpPosetiv)
+		{
+			NormalizedIndividual dnaTest({ Negativity::Positive ,20, 10 });
+			std::for_each(dnaTest.begin(), dnaTest.end(), [](float gene)
+			{
+				EXPECT_TRUE(gene < 1.1f && gene >= 0);
 			});
 		}
 		TEST(NormalizedIndevidual, CantAtOutSisdeOfDNASize)
@@ -162,6 +175,23 @@ namespace gaia
 				EXPECT_TRUE(gene > -6);
 				EXPECT_TRUE(gene < 15);
 			});
+		}
+	}
+	namespace Brain /////////////////////////////////////////////////////////////
+	{
+		TEST(BrinStruct, AssurtIfSomeValuseAre0)
+		{
+			EXPECT_DEATH(gaia::NodeSetUp({ 0,0,0,1 }), "");
+			EXPECT_DEATH(gaia::NodeSetUp({ 1,0,0,1 }), "");
+			EXPECT_DEATH(gaia::NodeSetUp({ 1,1,0,1 }), "");
+			EXPECT_DEATH(gaia::NodeSetUp({ 1,0,1,1 }), "");
+			EXPECT_DEATH(gaia::NodeSetUp({ 0,0,1,1 }), "");
+			EXPECT_DEATH(gaia::NodeSetUp({ 0,1,0,0 }), "");
+		}
+		TEST(BrinStruct, DontAssurtOnATotelyEmty)
+		{
+			gaia::NodeSetUp n({ 0,0,0,0 });
+			EXPECT_TRUE(true);
 		}
 	}
 }

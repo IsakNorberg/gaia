@@ -14,22 +14,5 @@ namespace gaia
 	unsigned int get_random_unique(unsigned int utilization);
 	float get_random_range_normalized_posetiv(unsigned  int precision) noexcept;
 
-	namespace
-	{
-		inline void seed() noexcept
-		{
-			srand(static_cast<int>(time(nullptr)));
-		}
-		inline auto random(unsigned int range)  noexcept 
-		{
-			static bool once = true;
-			if(once)
-			{
-				seed();
-				once = false;
-			}
-			return rand() % range;
-		}
-		
-	}
+	
 }
