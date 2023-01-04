@@ -66,22 +66,23 @@ void gaia::NormalizedIndividual::initialize(NormalizedIndividualBluePrint bluePr
 	{
 		gene = random(bluePrint._precision, bluePrint._attribute);
 	});
-	NodeSetUp n = nodeSetUp; // ta bort ville bra kunna bugga 
-	// kolla node set upp bär brain
-	// set upp fö resten av dna för hjärnan
+	_dna = add_node_dna_to_end(_dna, nodeSetUp);
 }
 
 gaia::NodeSetUp::NodeSetUp(unsigned int inputNodeAmount,
 						   unsigned int hiddenNodeAmountPerLayers,
 						   unsigned int hiddenNodeLayers,
-						   unsigned int outputNodeAmount)
+						   unsigned int outputNodeAmount) noexcept
 	:_inputNodeAmount{ inputNodeAmount },
 	_hiddenNodeAmountPerLayers{ hiddenNodeAmountPerLayers },
 	_hiddenNodeLayers{ hiddenNodeLayers },
 	_outputNodeAmount{ outputNodeAmount }
 {
-	int sentanal = inputNodeAmount + hiddenNodeLayers + hiddenNodeAmountPerLayers + outputNodeAmount;
-	if (sentanal == 0)
+
+	if (0 == inputNodeAmount + 
+			 hiddenNodeLayers + 
+			 hiddenNodeAmountPerLayers +		
+			 outputNodeAmount)
 	{
 		return;
 	}
@@ -92,4 +93,17 @@ gaia::NodeSetUp::NodeSetUp(unsigned int inputNodeAmount,
 	{
 		assert(!"no variable can be zero");
 	}
+}
+
+vectorOfFlots gaia::add_node_dna_to_end(vectorOfFlots dna, NodeSetUp nodeSetUp)
+{
+	if (0 == nodeSetUp._hiddenNodeAmountPerLayers + 
+		     nodeSetUp._hiddenNodeLayers + 
+			 nodeSetUp._inputNodeAmount + 
+			 nodeSetUp._outputNodeAmount)
+	{
+		return dna;
+	}
+	// TODO: to the ading of the niber in the rhite rande herare
+	return vectorOfFlots();
 }

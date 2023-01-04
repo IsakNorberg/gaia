@@ -18,7 +18,7 @@ namespace gaia
 	
 	struct NodeSetUp
 	{
-		NodeSetUp(unsigned int inputNodeAmount, unsigned int hiddenNodeAmountPerLayers, unsigned int hiddenNodeLayers, unsigned int outputNodeAmount);
+		NodeSetUp(unsigned int inputNodeAmount, unsigned int hiddenNodeAmountPerLayers, unsigned int hiddenNodeLayers, unsigned int outputNodeAmount) noexcept;
 		unsigned int _inputNodeAmount{0};
 		unsigned int _hiddenNodeAmountPerLayers{0};
 		unsigned int _hiddenNodeLayers{0};
@@ -53,6 +53,7 @@ namespace gaia
 		float get_fitness() const noexcept;
 		void set_fitness(float fitness) noexcept;
 	};
+	vectorOfFlots add_node_dna_to_end(vectorOfFlots dna, NodeSetUp nodeSetUp);
 }
 
 
