@@ -2,13 +2,21 @@
 
 namespace gaia
 {
-	// atrebuts
-	// random mutation or mating
+	
+	enum class Reproduction
+	{
+		RandomMutation,
+		Mating
+	};
 
-	// bluprit
-	// suvaver ratio 
-	// sice 
-	// atrbute
+	struct PopulationBluprint
+	{
+		double _survivorRatio;
+		unsigned int _size;
+		Reproduction _attribute;
+	}; 
+	
+	
 	class Population //TODO: implament
 	{
 		//genaration 
