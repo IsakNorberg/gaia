@@ -13,6 +13,6 @@ namespace gaia
 	unsigned int get_random_repeatable(unsigned int range) noexcept;
 	unsigned int get_random_unique(unsigned int utilization);
 	float get_random_range_normalized_posetiv(unsigned  int precision) noexcept;
+	bool get_random_bool() noexcept;
 
-	
 }

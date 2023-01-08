@@ -68,4 +68,16 @@ namespace gaia
 		return randomOut;
 	}
 
+	bool get_random_bool() noexcept
+	{
+		bool  outBool = false;
+		unsigned int precision = 1000;
+		float const testNumber = get_random_range_normalized(precision);
+		if (testNumber > 0)
+		{
+			outBool = true;
+		}
+		return outBool;
+	}
+
 }

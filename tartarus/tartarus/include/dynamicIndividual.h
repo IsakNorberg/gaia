@@ -12,6 +12,7 @@
 
 namespace gaia
 {
+	
 	enum class Repeatability
 	{
 		Unique,
@@ -60,6 +61,24 @@ namespace gaia
 		std::vector<DNAType>::iterator end() noexcept;
 	};
 
+	namespace
+	{
+
+		inline int get_random(Repeatability attribute, unsigned int utilization) noexcept
+		{
+			if (attribute == Repeatability::Unique)
+			{
+				return get_random_unique(utilization);
+			}
+			else if (attribute == Repeatability::Repeatable)
+			{
+				return get_random_repeatable(utilization);
+			}
+			assert(!"No Repeatability with that Attribute");
+			return 0;
+		}
+	}
+
 	template<typename DNAType>
 	gaia::DynamicIndividual<DNAType>::DynamicIndividual(DynamicIndividualBluePrint<DNAType> bluePrint)
 	{
@@ -68,7 +87,7 @@ namespace gaia
 		std::vector<DNAType> completSet = bluePrint._completSet;
 		std::ranges::for_each(_dna, [&](auto& gene)
 		{
-			gene = completSet.at(get_Random(bluePrint._attribute,utilization));
+			gene = completSet.at(get_random(bluePrint._attribute,utilization));
 		});
 
 	}
@@ -109,5 +128,6 @@ namespace gaia
 		return _dna.end();
 	}
 
-	int get_Random(Repeatability attribute, unsigned int utilization);
+	
+
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 // All header-files 
-#include "normalizedIndividual.h"
+#include "Individual.h"
 #include "random.h"
 #include "dynamicIndividual.h"
 

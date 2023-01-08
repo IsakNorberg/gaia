@@ -13,6 +13,7 @@ namespace gaia
 	}
 	namespace Random////////////////////////////////////////////////
 	{
+		//TODO: more testy fore random and make a debug random test fore individuals
 		TEST(GetNormalizedRandom, CantEnterLesThenOne)
 		{
 			EXPECT_DEATH(get_random_range_normalized(0), "");
@@ -56,49 +57,31 @@ namespace gaia
 				EXPECT_TRUE(it == vector.end());
 			});
 		}
+		TEST(GetRandomBool, IsRandom)
+		{
+			vectorOfBools a;
+			vectorOfBools b;
+			a.resize(1000);
+			b.resize(1000);
+			std::ranges::generate(a, []{ return get_random_bool();});
+			std::ranges::generate(b, [] { return get_random_bool(); });
+
+			EXPECT_FALSE(a == b);
+		}
 	}
-	namespace Indevidual//////////////////////////////////////////////////
+	namespace TestIndevidual//////////////////////////////////////////////////
 	{
-		TEST(NormalizedIndevidual, SetsUpToCorrectSize)
+		//TODO::re write test fore indevidual
+		TEST(TestForIndevidual, IsSetUpCorrectSize)
 		{
-			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,20, 10 });
-			EXPECT_EQ(dnaTest.size(), 20);
+			Individual i({ 3,5,5,4 });
+			EXPECT_EQ(i.size(), 135);
 		}
-		TEST(NormalizedIndevidual, SetsUpToCorrectSizePosetiv)
+		TEST(TestForIndevidual, IsSetUpCorrectAt)
 		{
-			NormalizedIndividual dnaTest({ Negativity::Positive ,20, 10 });
-			EXPECT_EQ(dnaTest.size(), 20);
-		}
-		TEST(NormalizedIndevidual, HandelZero)
-		{
-			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,0, 0 });
-			EXPECT_EQ(dnaTest.size(), 0);
-		}
-		TEST(NormalizedIndevidual, AllNumbersSetUp)
-		{
-			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,20, 10 });
-			std::for_each(dnaTest.begin(), dnaTest.end(), [](float gene)
-			{
-				EXPECT_TRUE(gene < 1.1f && gene > -1.1f);
-			});
-		}
-		TEST(NormalizedIndevidual, AllNumbersSetUpPosetiv)
-		{
-			NormalizedIndividual dnaTest({ Negativity::Positive ,20, 10 });
-			std::for_each(dnaTest.begin(), dnaTest.end(), [](float gene)
-			{
-				EXPECT_TRUE(gene < 1.1f && gene >= 0);
-			});
-		}
-		TEST(NormalizedIndevidual, CantAtOutSisdeOfDNASize)
-		{
-			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,20, 100 });
-			EXPECT_DEATH(dnaTest.at(20), "");
-		}
-		TEST(NormalizedIndevidual, CanATSmallerThenDNASIze)
-		{
-			NormalizedIndividual dnaTest({ Negativity::NagativAndPositive ,20, 100 });
-			EXPECT_TRUE(dnaTest.at(3) > -1.1);
+			Individual i({ 3,5,5,4 });
+			i.at(0);
+			EXPECT_EQ(i.size(), 135);
 		}
 		TEST(TestDynamicIndividualBluePrint, CantMakeUtilizationBiggerThenCompletSetIfUnique)
 		{
@@ -177,7 +160,7 @@ namespace gaia
 			});
 		}
 	}
-	namespace Brain /////////////////////////////////////////////////////////////
+	namespace TestBrain /////////////////////////////////////////////////////////////
 	{
 		TEST(BrinStruct, AssurtIfSomeValuseAre0)
 		{
