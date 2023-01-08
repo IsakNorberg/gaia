@@ -9,12 +9,10 @@ using  vectorOfBools = std::vector<bool>;
 
 namespace gaia
 {
-	//Genes that are normalized
 	class Individual
 	{	
 		float _fitness{0};
 		vectorOfBools _dna;
-		//Vector of intes set pu TODO: is the brain conactoons 
 	public:
 	
 		Individual(NodeSetUp nodeSetUp);
