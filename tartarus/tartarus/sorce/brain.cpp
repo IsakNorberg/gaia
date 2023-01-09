@@ -50,3 +50,13 @@ void gaia::NodeSetUp::correct_set_up_check(unsigned int inputNodeAmount, unsigne
 		assert(!"no variable can be zero");
 	}
 }
+
+gaia::Brain::Brain(gaia::BrainBluePrint bluePrint):_setUp(bluePrint._setUp)
+{
+
+}
+
+gaia::NodeSetUp gaia::Brain::get_node_set_up()const noexcept
+{
+	return _setUp;
+}

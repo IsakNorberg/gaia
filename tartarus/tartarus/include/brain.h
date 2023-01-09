@@ -19,14 +19,22 @@ namespace gaia
 		NagativAndPositive,
 		Positive
 	};
-	// blue print 
-	// inpot nodes per layer
-	// lyers 
-	// outpost nods 
-	// Noramazed indevidual Bluprint 
+	struct BrainBluePrint
+	{
+		NodeSetUp _setUp;
+		Negativity _attribute;
+	};
+
 
 	class Brain //TODO: implemt and list ut hur konac tions väljsa 
 	{
+		NodeSetUp _setUp;
+	public:
+		Brain(BrainBluePrint bluePrint);
+		NodeSetUp get_node_set_up()const noexcept;
+		//takes a vector of normalized floats == to inpot nodes
+		void input(std::vector<float> input); // maby make a input class 
+
 		// tack blue orint in constructor 
 		// mby normalezed indevidual  
 		// vecrtor of vector of lots
