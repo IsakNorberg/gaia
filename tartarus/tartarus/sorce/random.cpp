@@ -49,30 +49,30 @@ namespace gaia
 		return static_cast<unsigned int>(random(range));
 	}
 
-	unsigned int get_random_unique(unsigned int utilization) 
-	{
-		static std::vector<int> genaratedInts;
+	//unsigned int get_random_range_unique(unsigned int utilization) 
+	//{
+	//	/*static std::vector<int> genaratedInts;
 
-		while (true)
-		{
-			const int testValue = random(utilization);
-			auto iterator = std::find_if(genaratedInts.begin(), genaratedInts.end(), [testValue](int value)
-			{
-				return value == testValue;
-			});
-			if (iterator == genaratedInts.end())
-			{
-				genaratedInts.push_back(testValue);
-				if (genaratedInts.size() == utilization)
-				{
-					genaratedInts.clear();
-				}
-				return testValue;
-			}
-		}
-		assert(!"");
-		return 0;
-	}
+	//	while (true)
+	//	{
+	//		const int testValue = random(utilization);
+	//		auto iterator = std::find_if(genaratedInts.begin(), genaratedInts.end(), [testValue](int value)
+	//		{
+	//			return value == testValue;
+	//		});
+	//		if (iterator == genaratedInts.end())
+	//		{
+	//			genaratedInts.push_back(testValue);
+	//			if (genaratedInts.size() == utilization)
+	//			{
+	//				genaratedInts.clear();
+	//			}
+	//			return testValue;
+	//		}
+	//	}
+	//	assert(!"");
+	//	return 0;*/
+	//}
 
 	float get_random_range_normalized_posetiv(unsigned int precision) noexcept
 	{

@@ -29,12 +29,14 @@ namespace gaia
 	class Brain //TODO: implemt and list ut hur konac tions väljsa 
 	{
 		NodeSetUp _setUp;
+		Negativity _attribute;
 	public:
-		Brain(BrainBluePrint bluePrint);
+		Brain(BrainBluePrint bluePrint) noexcept;
 		NodeSetUp get_node_set_up()const noexcept;
 		//takes a vector of normalized floats == to inpot nodes
 		void input(std::vector<float> input); // maby make a input class 
-
+		std::vector<float> compute(std::vector<bool> DNA) const noexcept;
+		float compute_trigger_value(std::vector<bool> DNA) const noexcept ;
 		// tack blue orint in constructor 
 		// mby normalezed indevidual  
 		// vecrtor of vector of lots

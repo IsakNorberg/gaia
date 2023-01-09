@@ -27,7 +27,6 @@ namespace gaia
 				set_random_to_test(false);
 			}
 		};
-		//TODO: more testy fore random and make a debug random test fore individuals
 		TEST(RandomTest, TheRadomTestWoarks)
 		{ 
 			TestRandomObject t;
@@ -63,13 +62,10 @@ namespace gaia
 		}
 		TEST(GetRandomUnique, TheNumbersAreUniqe)
 		{
+
 			int s = 8;
-			std::vector<int> vector;
-			vector.resize(s);
-			std::for_each(vector.begin(), vector.end(), [&](int& num)
-			{
-				num = get_random_unique(static_cast<int>(vector.size()));
-			});
+			std::vector<int> vector = { 2,5,1,8,9,3,4,99,7,88 };
+			vector = get_random_range_unique<int>(s,vector);
 			std::for_each(vector.begin(), vector.end(), [&](int num)
 			{
 				int once = 0;
@@ -83,13 +79,11 @@ namespace gaia
 				});
 				EXPECT_TRUE(it == vector.end());
 			});
+
 			int s2 = 10;
-			std::vector<int> vector2;
-			vector.resize(s2);
-			std::for_each(vector2.begin(), vector2.end(), [&](int& num)
-			{
-				num = get_random_unique(static_cast<int>(vector2.size()));
-			});
+			std::vector<int> vector2 = { 33,2,5,4,77,6,4,72,99,9,78,24,11 };
+			vector2 = get_random_range_unique<int>(s2, vector2);
+
 			std::for_each(vector2.begin(), vector2.end(), [&](int num)
 			{
 				int once = 0;
@@ -101,7 +95,7 @@ namespace gaia
 				}
 				return once > 1;
 			});
-				EXPECT_TRUE(it == vector.end());
+				EXPECT_TRUE(it == vector2.end());
 			});
 		}
 		TEST(GetRandomBool, IsRandom)
@@ -232,10 +226,9 @@ namespace gaia
 			EXPECT_DEATH(gaia::NodeSetUp({ 0,0,1,1 }), "");
 			EXPECT_DEATH(gaia::NodeSetUp({ 0,1,0,0 }), "");
 		}
-		TEST(BrinStruct, DontAssurtOnATotelyEmty)
+		TEST(BrinStruct, AssurtOnATotelyEmty)
 		{
-			gaia::NodeSetUp n({ 0,0,0,0 });
-			EXPECT_TRUE(true);
+			EXPECT_DEATH(gaia::NodeSetUp n({ 0,0,0,0 }), "");
 		}
 	}
 }

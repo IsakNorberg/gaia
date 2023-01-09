@@ -51,7 +51,7 @@ void gaia::NodeSetUp::correct_set_up_check(unsigned int inputNodeAmount, unsigne
 	}
 }
 
-gaia::Brain::Brain(gaia::BrainBluePrint bluePrint):_setUp(bluePrint._setUp)
+gaia::Brain::Brain(gaia::BrainBluePrint bluePrint) noexcept:_setUp(bluePrint._setUp), _attribute(bluePrint._attribute)
 {
 
 }
@@ -59,4 +59,9 @@ gaia::Brain::Brain(gaia::BrainBluePrint bluePrint):_setUp(bluePrint._setUp)
 gaia::NodeSetUp gaia::Brain::get_node_set_up()const noexcept
 {
 	return _setUp;
+}
+
+std::vector<float> gaia::Brain::compute(std::vector<bool>)
+{
+	return std::vector<float>();
 }

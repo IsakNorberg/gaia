@@ -64,11 +64,11 @@ namespace gaia
 
 
 	template<typename DNAType>
-	inline int DynamicIndividual<DNAType>::get_random(Repeatability attribute, unsigned int utilization)
+	int DynamicIndividual<DNAType>::get_random(Repeatability attribute, unsigned int utilization)
 	{
 		if (attribute == Repeatability::Unique)
 		{
-			return  gaia::get_random_unique(utilization);
+			return  gaia::get_random_range_unique(utilization);
 		}
 		else if (attribute == Repeatability::Repeatable)
 		{
@@ -76,21 +76,23 @@ namespace gaia
 		}
 		assert(!"No Repeatability with that Attribute");
 		return 0;
-		
 	}
 
 	template<typename DNAType>
 	gaia::DynamicIndividual<DNAType>::DynamicIndividual(DynamicIndividualBluePrint<DNAType> bluePrint)
 	{
 		_dna.resize(bluePrint._utilization);
-		const unsigned int utilization = bluePrint._utilization;
 		std::vector<DNAType> completSet = bluePrint._completSet;
-		std::ranges::for_each(_dna, [&](auto& gene)
+		if (bluePrint._attribute == Repeatability::Repeatable)
 		{
-			gene = completSet.at(get_random(bluePrint._attribute,utilization));
-		});
-
+			std::ranges::generate(_dna, [&] {return completSet.at(get_random_repeatable(bluePrint._utilization)); });
+		}
+		else if (bluePrint._attribute == Repeatability::Unique)
+		{
+			_dna = get_random_range_unique(bluePrint._utilization, completSet);
+		}
 	}
+
 	template<typename DNAType>
 	size_t gaia::DynamicIndividual<DNAType>::size() noexcept
 	{
