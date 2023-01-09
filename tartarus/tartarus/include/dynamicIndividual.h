@@ -44,7 +44,8 @@ namespace gaia
 	//Genes that can be anything in any range
 	template <typename DNAType>
 	class DynamicIndividual
-	{	
+	{
+		int get_random(Repeatability attribute, unsigned int utilization);
 		std::vector<DNAType> _dna;
 		float _fitness{0};
 	public:
@@ -61,22 +62,21 @@ namespace gaia
 		std::vector<DNAType>::iterator end() noexcept;
 	};
 
-	namespace
-	{
 
-		inline int get_random(Repeatability attribute, unsigned int utilization) noexcept
+	template<typename DNAType>
+	inline int DynamicIndividual<DNAType>::get_random(Repeatability attribute, unsigned int utilization)
+	{
+		if (attribute == Repeatability::Unique)
 		{
-			if (attribute == Repeatability::Unique)
-			{
-				return get_random_unique(utilization);
-			}
-			else if (attribute == Repeatability::Repeatable)
-			{
-				return get_random_repeatable(utilization);
-			}
-			assert(!"No Repeatability with that Attribute");
-			return 0;
+			return  gaia::get_random_unique(utilization);
 		}
+		else if (attribute == Repeatability::Repeatable)
+		{
+			return gaia::get_random_repeatable(utilization);
+		}
+		assert(!"No Repeatability with that Attribute");
+		return 0;
+		
 	}
 
 	template<typename DNAType>

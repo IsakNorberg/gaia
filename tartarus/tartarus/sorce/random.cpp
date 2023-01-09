@@ -4,21 +4,35 @@ namespace gaia
 {
 	namespace
 	{
+		inline unsigned int get_pattern(unsigned int range) noexcept
+		{
+			static bool getZero = false;
+			if (getZero)
+			{
+				getZero = false;
+				return 0;
+			}
+			getZero = true;
+			return range-1;
+		}
 		inline void seed() noexcept
 		{
 			srand(static_cast<int>(time(nullptr)));
 		}
 		inline auto random(unsigned int range)  noexcept
 		{
-			static bool once = true;
-			if (once)
+			static bool haveRunSeed = true;
+			if (haveRunSeed)
 			{
 				seed();
-				once = false;
+				haveRunSeed = false;
+			}
+			if (TEST)
+			{
+				return get_pattern(range);
 			}
 			return rand() % range;
 		}
-
 	}
 	
 	float get_random_range_normalized(unsigned int precision) noexcept
@@ -78,6 +92,11 @@ namespace gaia
 			outBool = true;
 		}
 		return outBool;
+	}
+
+	void set_random_to_test(bool test) noexcept
+	{
+		TEST = test;
 	}
 
 }

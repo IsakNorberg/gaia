@@ -1,7 +1,7 @@
 #include "Individual.h"
 
 //make new konstructer
-gaia::Individual::Individual(NodeSetUp nodeSetUp)
+gaia::Individual::Individual(NodeSetUp nodeSetUp) noexcept
 {
 	_dna = add_node_dna(_dna, nodeSetUp);
 }
@@ -43,7 +43,6 @@ void gaia::Individual::set_fitness(float fitness) noexcept
 
 vectorOfBools gaia::add_node_dna(vectorOfBools dna, NodeSetUp nodeSetUp)
 {
-	zero_check(nodeSetUp);
 	const int hiddenPerLayers = nodeSetUp._hiddenNodeAmountPerLayers;
 	const int dnaSize = nodeSetUp._inputNodeAmount * hiddenPerLayers +
 		hiddenPerLayers * hiddenPerLayers * (nodeSetUp._hiddenNodeLayers - 1) +

@@ -16,7 +16,10 @@ namespace
 		return .0f;
 	}
 
+
 }
+
+
 gaia::NodeSetUp::NodeSetUp(unsigned int inputNodeAmount,
 						   unsigned int hiddenNodeAmountPerLayers,
 						   unsigned int hiddenNodeLayers,
@@ -37,7 +40,7 @@ void gaia::NodeSetUp::correct_set_up_check(unsigned int inputNodeAmount, unsigne
 		hiddenNodeAmountPerLayers +
 		outputNodeAmount)
 	{
-		return;
+		assert(!"set up is empty");
 	}
 	if (inputNodeAmount == 0 ||
 		hiddenNodeAmountPerLayers == 0 ||

@@ -4,6 +4,8 @@
 #include <algorithm>
 namespace gaia
 {
+
+
 	namespace Bacic
 	{ 
 		TEST(BasictTests, IncludeCorectly)
@@ -13,7 +15,32 @@ namespace gaia
 	}
 	namespace Random////////////////////////////////////////////////
 	{
+		class TestRandomObject
+		{
+		public:
+			TestRandomObject()
+			{
+				set_random_to_test(true);
+			}
+			~TestRandomObject()
+			{
+				set_random_to_test(false);
+			}
+		};
 		//TODO: more testy fore random and make a debug random test fore individuals
+		TEST(RandomTest, TheRadomTestWoarks)
+		{ 
+			TestRandomObject t;
+			std::vector<int> a;
+			std::vector<int> b;
+			a.resize(10);
+			b.resize(10);
+			std::ranges::generate(a, [] { return get_random_repeatable(100);});
+			std::ranges::generate(b, [] { return get_random_repeatable(100); });
+			EXPECT_EQ(a, b);
+		
+		}
+
 		TEST(GetNormalizedRandom, CantEnterLesThenOne)
 		{
 			EXPECT_DEATH(get_random_range_normalized(0), "");
@@ -56,6 +83,26 @@ namespace gaia
 				});
 				EXPECT_TRUE(it == vector.end());
 			});
+			int s2 = 10;
+			std::vector<int> vector2;
+			vector.resize(s2);
+			std::for_each(vector2.begin(), vector2.end(), [&](int& num)
+			{
+				num = get_random_unique(static_cast<int>(vector2.size()));
+			});
+			std::for_each(vector2.begin(), vector2.end(), [&](int num)
+			{
+				int once = 0;
+				auto it = std::find_if(vector2.begin(), vector2.end(), [num, &once](int v)
+			{
+				if (v == num)
+				{
+					++once;
+				}
+				return once > 1;
+			});
+				EXPECT_TRUE(it == vector.end());
+			});
 		}
 		TEST(GetRandomBool, IsRandom)
 		{
@@ -81,7 +128,21 @@ namespace gaia
 		{
 			Individual i({ 3,5,5,4 });
 			i.at(0);
+			i.at(2);
+			i.at(134);
+			i.at(1);
 			EXPECT_EQ(i.size(), 135);
+		}
+		TEST(TestForIndevidual, IsSetUpCorrectValus)
+		{
+			Random::TestRandomObject t;
+			Individual i({ 3,5,5,4 });
+
+			EXPECT_EQ(i.at(0), true);
+			EXPECT_EQ(i.at(1), false);
+			EXPECT_EQ(i.at(10), true);
+			EXPECT_EQ(i.at(20), true);
+			
 		}
 		TEST(TestDynamicIndividualBluePrint, CantMakeUtilizationBiggerThenCompletSetIfUnique)
 		{
