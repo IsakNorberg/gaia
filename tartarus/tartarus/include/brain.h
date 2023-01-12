@@ -26,7 +26,7 @@ namespace gaia
 	};
 
 
-	class Brain //TODO: implemt and list ut hur konac tions väljsa 
+	class Brain //TODO: implement and list ut hur konac tions väljsa 
 	{
 		NodeSetUp _setUp;
 		Negativity _attribute;
