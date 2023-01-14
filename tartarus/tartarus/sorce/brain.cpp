@@ -61,7 +61,25 @@ gaia::NodeSetUp gaia::Brain::get_node_set_up()const noexcept
 	return _setUp;
 }
 
-std::vector<float> gaia::Brain::compute(std::vector<bool>)
+void gaia::Brain::set_input(std::vector<float> input) noexcept
 {
+	_input = input;
+}
+
+std::vector<float> gaia::Brain::run_compute(std::vector<bool>) const noexcept
+{
+
+
+
+
 	return std::vector<float>();
+}
+float gaia::Brain::compute_trigger_value(std::vector<bool> DNA) const noexcept
+{
+	std::vector<float> out = run_compute(DNA);
+	std::ranges::sort(out, [](float lhs, float rhs) // maby partiol sort
+	{
+		return lhs > rhs;
+	});
+	return out.at(0);
 }

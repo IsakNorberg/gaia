@@ -30,18 +30,20 @@ namespace gaia
 	{
 		NodeSetUp _setUp;
 		Negativity _attribute;
+		std::vector<float> _input;
+
 	public:
 		Brain(BrainBluePrint bluePrint) noexcept;
 		NodeSetUp get_node_set_up()const noexcept;
 		//takes a vector of normalized floats == to inpot nodes
-		void input(std::vector<float> input); // maby make a input class 
-		std::vector<float> compute(std::vector<bool> DNA) const noexcept;
-		float compute_trigger_value(std::vector<bool> DNA) const noexcept ;
+		void set_input(std::vector<float> input) noexcept; // maby make a input class 
+		std::vector<float> run_compute(std::vector<bool> DNA) const noexcept;
+		float compute_trigger_value(std::vector<bool> DNA) const noexcept;
 		// tack blue orint in constructor 
 		// mby normalezed indevidual  
 		// vecrtor of vector of lots
 		// vector<flot> outpuit 
 		// or unsind int as a index as put pot as the bigest valu 
 	};
-
+	std::vector<float> normaleze(std::vector<float> nodsIn);
 }
