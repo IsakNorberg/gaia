@@ -34,7 +34,6 @@ gaia::NodeSetUp::NodeSetUp(unsigned int inputNodeAmount,
 
 void gaia::NodeSetUp::correct_set_up_check(unsigned int inputNodeAmount, unsigned int hiddenNodeAmountPerLayers, unsigned int hiddenNodeLayers, unsigned int outputNodeAmount) noexcept
 {
-
 	if (0 == inputNodeAmount +
 		hiddenNodeLayers +
 		hiddenNodeAmountPerLayers +
@@ -53,7 +52,6 @@ void gaia::NodeSetUp::correct_set_up_check(unsigned int inputNodeAmount, unsigne
 
 gaia::Brain::Brain(gaia::BrainBluePrint bluePrint) noexcept:_setUp(bluePrint._setUp), _attribute(bluePrint._attribute)
 {
-
 }
 
 gaia::NodeSetUp gaia::Brain::get_node_set_up()const noexcept
@@ -68,7 +66,7 @@ void gaia::Brain::set_input(std::vector<float> input) noexcept
 
 std::vector<float> gaia::Brain::run_compute(std::vector<bool>) const noexcept
 {
-
+	
 
 
 

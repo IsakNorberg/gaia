@@ -14,7 +14,6 @@ namespace gaia
 		float _fitness{0};
 		vectorOfBools _dna;
 	public:
-	
 		Individual(NodeSetUp nodeSetUp)  noexcept;
 		size_t size()noexcept;
 		float at(unsigned int index);
