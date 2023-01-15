@@ -43,7 +43,7 @@ void gaia::Individual::set_fitness(float fitness) noexcept
 
 vectorOfBools gaia::add_node_dna(vectorOfBools dna, NodeSetUp nodeSetUp)
 {
-	const int hiddenPerLayers = nodeSetUp._hiddenNodeAmountPerLayers;
+	const int hiddenPerLayers = nodeSetUp._hiddenNodeBreadth;
 	const int dnaSize = nodeSetUp._inputNodeAmount * hiddenPerLayers +
 		hiddenPerLayers * hiddenPerLayers * (nodeSetUp._hiddenNodeLayers - 1) +
 		nodeSetUp._outputNodeAmount * hiddenPerLayers;
