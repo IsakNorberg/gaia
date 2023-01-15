@@ -49,7 +49,6 @@ namespace gaia
 		std::vector<DNAType> _dna;
 		float _fitness{0};
 	public:
-
 		DynamicIndividual(DynamicIndividualBluePrint<DNAType> bluePrint);
 		size_t size() noexcept;
 		
