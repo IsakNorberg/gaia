@@ -14,9 +14,10 @@ namespace gaia
 	private:
 		void correct_set_up_check(unsigned int inputNodeAmount, unsigned int hiddenNodeAmountPerLayers, unsigned int hiddenNodeLayers, unsigned int outputNodeAmount) noexcept;
 	};
+
 	class BrainNode
 	{
-		float valu;
+		float _value{ 0 };
 		std::vector<bool> connections;
 	public:
 		bool operator[](size_t index);
@@ -33,6 +34,9 @@ namespace gaia
 		void set_hidden_node_breadth(unsigned int amount);
 	public:
 		NeuralNet(NodeSetUp setUp);
+		void set_input_nodes(std::vector<bool> nodeConactions);
+		void set_hidden_nodes(std::vector<bool> nodeConactions);
+		void set_potput_nodes(std::vector<bool> nodeConactions);
 	};
 
 	enum class Negativity

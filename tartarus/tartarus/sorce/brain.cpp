@@ -50,8 +50,14 @@ void gaia::NodeSetUp::correct_set_up_check(unsigned int inputNodeAmount, unsigne
 
 void gaia::Brain::seed_neural_net(std::vector<bool> DNA)
 {
-	//ranges move then rotate and eraze
-	// se
+	int nodeIOffSet = _setUp._inputNodeAmount * _setUp._hiddenNodeBreadth;
+	auto begin = DNA.begin();
+	std::vector<bool> out;
+	std::copy(begin, begin + nodeIOffSet, out);
+	_nerualNet.set_input_nodes(out);
+	begin = begin + nodeIOffSet;
+	nodeIOffSet = nodeIOffSet + (_setUp._hiddenNodeBreadth* _setUp._hiddenNodeLayers* _setUp._hiddenNodeBreadth) -_setUp._hiddenNodeBreadth ; // calc all the amunts and conactions hiddenn nods
+	std::copy(begin, begin + nodeIOffSet, out);
 }
 
 gaia::Brain::Brain(gaia::BrainBluePrint bluePrint) :_setUp(bluePrint._setUp), _attribute(bluePrint._attribute), _nerualNet(bluePrint._setUp)
