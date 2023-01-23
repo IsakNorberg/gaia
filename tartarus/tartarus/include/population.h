@@ -12,7 +12,7 @@ namespace gaia
 	struct PopulationBluprint
 	{
 		double _survivorRatio;
-		unsigned int _size;
+		uint _size;
 		Reproduction _attribute;
 	}; 
 	

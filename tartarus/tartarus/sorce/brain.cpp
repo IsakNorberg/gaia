@@ -2,7 +2,7 @@
 
 namespace
 {
-	inline float random(unsigned int precition, gaia::Negativity atribute) noexcept
+	inline float random(uint precition, gaia::Negativity atribute) noexcept
 	{
 		if (atribute == gaia::Negativity::NagativAndPositive)
 		{
@@ -18,10 +18,10 @@ namespace
 }
 
 
-gaia::NodeSetUp::NodeSetUp(unsigned int inputNodeAmount,
-						   unsigned int hiddenNodeAmountPerLayers,
-						   unsigned int hiddenNodeLayers,
-						   unsigned int outputNodeAmount) noexcept
+gaia::NodeSetUp::NodeSetUp(uint inputNodeAmount,
+						   uint hiddenNodeAmountPerLayers,
+						   uint hiddenNodeLayers,
+						   uint outputNodeAmount) noexcept
 	:_inputNodeAmount{ inputNodeAmount },
 	_hiddenNodeBreadth{ hiddenNodeAmountPerLayers },
 	_hiddenNodeLayers{ hiddenNodeLayers },
@@ -30,7 +30,7 @@ gaia::NodeSetUp::NodeSetUp(unsigned int inputNodeAmount,
 	correct_set_up_check(inputNodeAmount, hiddenNodeAmountPerLayers, hiddenNodeLayers, outputNodeAmount);
 }
 
-void gaia::NodeSetUp::correct_set_up_check(unsigned int inputNodeAmount, unsigned int hiddenNodeAmountPerLayers, unsigned int hiddenNodeLayers, unsigned int outputNodeAmount) noexcept
+void gaia::NodeSetUp::correct_set_up_check(uint inputNodeAmount, uint hiddenNodeAmountPerLayers, uint hiddenNodeLayers, uint outputNodeAmount) noexcept
 {
 	if (0 == inputNodeAmount +
 		hiddenNodeLayers +
@@ -48,25 +48,23 @@ void gaia::NodeSetUp::correct_set_up_check(unsigned int inputNodeAmount, unsigne
 	}
 }
 
-void gaia::Brain::seed_neural_net(std::vector<bool> DNA)
+void gaia::Brain::seed_neural_net(std::vector<bool> DNA) noexcept
 {
-	int nodeIOffSet = _setUp._inputNodeAmount * _setUp._hiddenNodeBreadth;
-	auto begin = DNA.begin();
-	std::vector<bool> out;
-	std::copy(begin, begin + nodeIOffSet, out);
-	_nerualNet.set_input_nodes(out);
-	begin = begin + nodeIOffSet;
-	nodeIOffSet = nodeIOffSet + (_setUp._hiddenNodeBreadth* _setUp._hiddenNodeLayers* _setUp._hiddenNodeBreadth) -_setUp._hiddenNodeBreadth ; // calc all the amunts and conactions hiddenn nods
-	std::copy(begin, begin + nodeIOffSet, out);
+	_nerualNet.set_nods(DNA);
 }
 
-gaia::Brain::Brain(gaia::BrainBluePrint bluePrint) :_setUp(bluePrint._setUp), _attribute(bluePrint._attribute), _nerualNet(bluePrint._setUp)
+gaia::Brain::Brain(gaia::BrainBluePrint bluePrint) :_attribute(bluePrint._attribute), _nerualNet(bluePrint._setUp)
 {
+	const NodeSetUp setUp = bluePrint._setUp;
+	_inputNodeAmount = setUp._inputNodeAmount;
+	_hiddenNodeBreadth = setUp._hiddenNodeBreadth;
+	_hiddenNodeLayers = setUp._hiddenNodeLayers;
+	_outputNodeAmount = setUp._outputNodeAmount;
 }
 
 gaia::NodeSetUp gaia::Brain::get_node_set_up()const noexcept
 {
-	return _setUp;
+	return { _inputNodeAmount, _hiddenNodeBreadth, _hiddenNodeLayers, _outputNodeAmount };
 }
 
 void gaia::Brain::set_input(std::vector<float> input) noexcept
@@ -98,27 +96,40 @@ bool gaia::BrainNode::operator[](size_t index)
 	return connections.at(index);
 }
 
-void gaia::NeuralNet::set_input_node_amount(unsigned int amount)
+void gaia::NeuralNet::set_input_node_amount(uint amount)
 {
 	_inputNodes.resize(amount);
 }
 
-void gaia::NeuralNet::set_output_node_amount(unsigned int amount)
+void gaia::NeuralNet::set_output_node_amount(uint amount)
 {
 	_outputNodes.resize(amount);
 }
 
-void gaia::NeuralNet::set_hidden_node_layers(unsigned int amount)
+void gaia::NeuralNet::set_hidden_node_layers(uint amount)
 {
 	_hiddenNodes.resize(amount);
 }
 
-void gaia::NeuralNet::set_hidden_node_breadth(unsigned int amount)
+void gaia::NeuralNet::set_hidden_node_breadth(uint amount)
 {
 	for (auto& vector : _hiddenNodes)
 	{
 		vector.resize(amount);
 	}
+}
+
+void gaia::NeuralNet::set_input_nodes(std::vector<bool> nodeConactions)
+{
+
+}
+
+void gaia::NeuralNet::set_hidden_nodes(std::vector<bool> nodeConactions)
+{
+}
+
+void gaia::NeuralNet::set_potput_nodes(std::vector<bool> nodeConactions)
+{
 }
 
 gaia::NeuralNet::NeuralNet(NodeSetUp setUp)
@@ -129,3 +140,12 @@ gaia::NeuralNet::NeuralNet(NodeSetUp setUp)
 	set_hidden_node_breadth(setUp._hiddenNodeBreadth);
 }
 
+void gaia::NeuralNet::set_nods(std::vector<bool> DNA)
+{
+
+}
+
+std::vector<float> gaia::normaleze(std::vector<float> nodsIn)
+{
+	return std::vector<float>();
+}

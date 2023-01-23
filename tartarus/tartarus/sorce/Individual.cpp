@@ -12,7 +12,7 @@ size_t gaia::Individual::size() noexcept
 	return _dna.size();
 }
 
-float gaia::Individual::at(unsigned int index)
+float gaia::Individual::at(uint index)
 {
 	assert(_dna.size() > index);
 	return _dna.at(index);

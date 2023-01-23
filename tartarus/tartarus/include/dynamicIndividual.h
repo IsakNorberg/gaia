@@ -23,14 +23,14 @@ namespace gaia
 	struct DynamicIndividualBluePrint
 	{
 		Repeatability _attribute;
-		unsigned int _utilization;
+		uint _utilization;
 		std::vector<DNAType> _completSet;
-		DynamicIndividualBluePrint(Repeatability attribute, unsigned int utilization, std::vector<DNAType> completSet);
+		DynamicIndividualBluePrint(Repeatability attribute, uint utilization, std::vector<DNAType> completSet);
 	};
 
 	template <typename DNAType>
 	gaia::DynamicIndividualBluePrint<DNAType>::DynamicIndividualBluePrint(Repeatability attribute,
-																		  unsigned int utilization,
+																		  uint utilization,
 																		  std::vector<DNAType> completSet) : _attribute(attribute), _utilization(utilization), _completSet(completSet)
 	{
 		if (_attribute == Repeatability::Unique)
@@ -43,14 +43,14 @@ namespace gaia
 	template <typename DNAType>
 	class DynamicIndividual
 	{
-		int get_random(Repeatability attribute, unsigned int utilization);
+		int get_random(Repeatability attribute, uint utilization);
 		std::vector<DNAType> _dna;
 		float _fitness{0};
 	public:
 		DynamicIndividual(DynamicIndividualBluePrint<DNAType> bluePrint);
 		size_t size() noexcept;
 		
-		DNAType at(unsigned int index);
+		DNAType at(uint index);
 
 		float get_fitness() const noexcept;
 		void set_fitness(float fitness)noexcept;
@@ -84,7 +84,7 @@ namespace gaia
 	}
 
 	template<typename DNAType>
-	DNAType gaia::DynamicIndividual<DNAType>::at(unsigned int index)
+	DNAType gaia::DynamicIndividual<DNAType>::at(uint index)
 	{
 		assert(_dna.size() > index);
 		return  _dna.at(index);
