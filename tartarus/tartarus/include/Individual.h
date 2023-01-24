@@ -16,7 +16,7 @@ namespace gaia
 	public:
 		Individual(NodeSetUp nodeSetUp)  noexcept;
 		size_t size()noexcept;
-		float at(unsigned int index);
+		float at(uint index);
 		
 		vectorOfBools::iterator begin()noexcept;
 		vectorOfBools::iterator end()noexcept;

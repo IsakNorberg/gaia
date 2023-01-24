@@ -6,17 +6,18 @@ namespace gaia
 {
 	struct NodeSetUp
 	{
-		NodeSetUp(unsigned int inputNodeAmount, unsigned int hiddenNodeAmountPerLayers, unsigned int hiddenNodeLayers, unsigned int outputNodeAmount) noexcept;
-		unsigned int _inputNodeAmount{ 0 };
-		unsigned int _hiddenNodeBreadth{ 0 };
-		unsigned int _hiddenNodeLayers{ 0 };
-		unsigned int _outputNodeAmount{ 0 };
+		NodeSetUp(uint inputNodeAmount, uint hiddenNodeAmountPerLayers, uint hiddenNodeLayers, uint outputNodeAmount) noexcept;
+		uint _inputNodeAmount{ 0 };
+		uint _hiddenNodeBreadth{ 0 };
+		uint _hiddenNodeLayers{ 0 };
+		uint _outputNodeAmount{ 0 };
 	private:
-		void correct_set_up_check(unsigned int inputNodeAmount, unsigned int hiddenNodeAmountPerLayers, unsigned int hiddenNodeLayers, unsigned int outputNodeAmount) noexcept;
+		void correct_set_up_check(uint inputNodeAmount, uint hiddenNodeAmountPerLayers, uint hiddenNodeLayers, uint outputNodeAmount) noexcept;
 	};
+
 	class BrainNode
 	{
-		float valu;
+		float _value{ 0 };
 		std::vector<bool> connections;
 	public:
 		bool operator[](size_t index);
@@ -27,12 +28,17 @@ namespace gaia
 		std::vector<BrainNode> _inputNodes;
 		std::vector <std::vector<BrainNode>> _hiddenNodes;
 		std::vector<BrainNode> _outputNodes;
-		void set_input_node_amount(unsigned int amount);
-		void set_output_node_amount(unsigned int amount);
-		void set_hidden_node_layers(unsigned int amount);
-		void set_hidden_node_breadth(unsigned int amount);
+		void set_input_node_amount(uint amount);
+		void set_output_node_amount(uint amount);
+		void set_hidden_node_layers(uint amount);
+		void set_hidden_node_breadth(uint amount);
+
+		std::vector<bool> set_input_nodes(std::vector<bool> nodeConactions);
+		std::vector<bool> set_hidden_nodes(std::vector<bool> nodeConactions);
+		void set_output_nodes(std::vector<bool> nodeConactions);
 	public:
 		NeuralNet(NodeSetUp setUp);
+		void set_nods(std::vector<bool> DNA);
 	};
 
 	enum class Negativity
@@ -47,10 +53,12 @@ namespace gaia
 		Negativity _attribute;
 	};
 
-
 	class Brain
 	{
-		NodeSetUp _setUp;
+		uint _inputNodeAmount{ 0 };
+		uint _hiddenNodeBreadth{ 0 };
+		uint _hiddenNodeLayers{ 0 };
+		uint _outputNodeAmount{ 0 };
 		Negativity _attribute;
 		std::vector<float> _input;
 		NeuralNet _nerualNet;
@@ -58,12 +66,17 @@ namespace gaia
 	public:
 		Brain(BrainBluePrint bluePrint);
 		NodeSetUp get_node_set_up()const noexcept;
-		void seed_neural_net(std::vector<bool> DNA);
-
+		void seed_neural_net(std::vector<bool> DNA) noexcept;
 		void set_input(std::vector<float> input) noexcept;
 		std::vector<float> run_compute(std::vector<bool> DNA) const noexcept;
 		float compute_trigger_value(std::vector<bool> DNA) const noexcept;
 
 	};
 	std::vector<float> normaleze(std::vector<float> nodsIn); //TODO: implamant
+
+	template <class Type>
+	std::vector<Type> erase_move_n(std::vector<Type> vector, size_t n)
+	{
+		return std::vector<Type>;
+	};
 }

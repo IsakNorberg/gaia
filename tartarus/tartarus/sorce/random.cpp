@@ -4,7 +4,7 @@ namespace gaia
 {
 	namespace
 	{
-		inline unsigned int get_pattern(unsigned int range) noexcept
+		inline uint get_pattern(uint range) noexcept
 		{
 			static bool getZero = false;
 			if (getZero)
@@ -19,7 +19,7 @@ namespace gaia
 		{
 			srand(static_cast<int>(time(nullptr)));
 		}
-		inline auto random(unsigned int range)  noexcept
+		inline auto random(uint range)  noexcept
 		{
 			static bool haveRunSeed = true;
 			if (haveRunSeed)
@@ -35,7 +35,7 @@ namespace gaia
 		}
 	}
 	
-	float get_random_range_normalized(unsigned int precision) noexcept
+	float get_random_range_normalized(uint precision) noexcept
 	{
 		assert(precision > 0);
 		float randomOut = static_cast<float>(random(precision) * 2); // to get negative numbers 
@@ -44,37 +44,13 @@ namespace gaia
 		return randomOut;
 	}
 
-	unsigned int get_random_repeatable(unsigned int range) noexcept
+	uint get_random_repeatable(uint range) noexcept
 	{
-		return static_cast<unsigned int>(random(range));
+		return static_cast<uint>(random(range));
 	}
 
-	//unsigned int get_random_range_unique(unsigned int utilization) 
-	//{
-	//	/*static std::vector<int> genaratedInts;
 
-	//	while (true)
-	//	{
-	//		const int testValue = random(utilization);
-	//		auto iterator = std::find_if(genaratedInts.begin(), genaratedInts.end(), [testValue](int value)
-	//		{
-	//			return value == testValue;
-	//		});
-	//		if (iterator == genaratedInts.end())
-	//		{
-	//			genaratedInts.push_back(testValue);
-	//			if (genaratedInts.size() == utilization)
-	//			{
-	//				genaratedInts.clear();
-	//			}
-	//			return testValue;
-	//		}
-	//	}
-	//	assert(!"");
-	//	return 0;*/
-	//}
-
-	float get_random_range_normalized_posetiv(unsigned int precision) noexcept
+	float get_random_range_normalized_posetiv(uint precision) noexcept
 	{
 		assert(precision > 0);
 		float randomOut = static_cast<float>(random(precision));
@@ -85,7 +61,7 @@ namespace gaia
 	bool get_random_bool() noexcept
 	{
 		bool  outBool = false;
-		unsigned int precision = 1000;
+		constexpr int precision = 1000;
 		float const testNumber = get_random_range_normalized(precision);
 		if (testNumber > 0)
 		{

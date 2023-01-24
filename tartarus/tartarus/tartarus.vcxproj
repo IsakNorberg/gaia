@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\setings.h" />
     <ClInclude Include="include\brain.h" />
     <ClInclude Include="include\population.h" />
     <ClInclude Include="include\Individual.h" />
