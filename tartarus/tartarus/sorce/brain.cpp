@@ -74,10 +74,6 @@ void gaia::Brain::set_input(std::vector<float> input) noexcept
 
 std::vector<float> gaia::Brain::run_compute(std::vector<bool>) const noexcept
 {
-	
-
-
-
 	return std::vector<float>();
 }
 float gaia::Brain::compute_trigger_value(std::vector<bool> DNA) const noexcept
@@ -119,16 +115,24 @@ void gaia::NeuralNet::set_hidden_node_breadth(uint amount)
 	}
 }
 
-void gaia::NeuralNet::set_input_nodes(std::vector<bool> nodeConactions)
+std::vector<bool> gaia::NeuralNet::set_input_nodes(std::vector<bool> nodeConactions)
 {
-
+	uint i = 0;
+	for (BrainNode& node : _inputNodes)
+	{
+		node[nodeConactions[i++]];
+	}
+	auto it = std::rotate(nodeConactions.begin(), nodeConactions.begin()+i, nodeConactions.end());
+	nodeConactions.erase(it);
+	return nodeConactions;
 }
 
-void gaia::NeuralNet::set_hidden_nodes(std::vector<bool> nodeConactions)
+std::vector<bool> gaia::NeuralNet::set_hidden_nodes(std::vector<bool> nodeConactions)
 {
+	return std::vector<bool>();
 }
 
-void gaia::NeuralNet::set_potput_nodes(std::vector<bool> nodeConactions)
+void gaia::NeuralNet::set_output_nodes(std::vector<bool> nodeConactions)
 {
 }
 
@@ -142,7 +146,9 @@ gaia::NeuralNet::NeuralNet(NodeSetUp setUp)
 
 void gaia::NeuralNet::set_nods(std::vector<bool> DNA)
 {
-
+	DNA = set_input_nodes(DNA);
+	DNA = set_hidden_nodes(DNA);
+	set_output_nodes(DNA);
 }
 
 std::vector<float> gaia::normaleze(std::vector<float> nodsIn)

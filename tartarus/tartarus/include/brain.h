@@ -33,9 +33,9 @@ namespace gaia
 		void set_hidden_node_layers(uint amount);
 		void set_hidden_node_breadth(uint amount);
 
-		void set_input_nodes(std::vector<bool> nodeConactions);
-		void set_hidden_nodes(std::vector<bool> nodeConactions);
-		void set_potput_nodes(std::vector<bool> nodeConactions);
+		std::vector<bool> set_input_nodes(std::vector<bool> nodeConactions);
+		std::vector<bool> set_hidden_nodes(std::vector<bool> nodeConactions);
+		void set_output_nodes(std::vector<bool> nodeConactions);
 	public:
 		NeuralNet(NodeSetUp setUp);
 		void set_nods(std::vector<bool> DNA);
@@ -73,4 +73,10 @@ namespace gaia
 
 	};
 	std::vector<float> normaleze(std::vector<float> nodsIn); //TODO: implamant
+
+	template <class Type>
+	std::vector<Type> erase_move_n(std::vector<Type> vector, size_t n)
+	{
+		return std::vector<Type>;
+	};
 }
