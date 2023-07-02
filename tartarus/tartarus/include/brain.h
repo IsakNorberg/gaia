@@ -72,11 +72,13 @@ namespace gaia
 		float compute_trigger_value(std::vector<bool> DNA) const noexcept;
 
 	};
-	std::vector<float> normaleze(std::vector<float> nodsIn); //TODO: implamant
+	std::vector<BrainNode> normaleze(std::vector<gaia::BrainNode> nodsIn); //TODO: implamant
 
 	template <class Type>
-	std::vector<Type> erase_move_n(std::vector<Type> vector, size_t n)
+	std::vector<Type> erase_move_n(std::vector<Type> vector, size_t n) // todo test
 	{
-		return std::vector<Type>;
+		auto it = std::rotate(vector.begin(), vector.end().begin() + n,vector.end());
+		vector.erase(it);
+		return vector;
 	};
 }

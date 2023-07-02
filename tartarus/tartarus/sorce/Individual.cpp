@@ -7,7 +7,7 @@ gaia::Individual::Individual(NodeSetUp nodeSetUp) noexcept
 }
 
 
-size_t gaia::Individual::size() noexcept
+size_t gaia::Individual::size()const noexcept 
 {
 	return _dna.size();
 }

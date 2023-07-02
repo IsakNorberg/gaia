@@ -15,12 +15,12 @@ namespace gaia
 		vectorOfBools _dna;
 	public:
 		Individual(NodeSetUp nodeSetUp)  noexcept;
-		size_t size()noexcept;
+		[[nodiscard]] size_t size()const noexcept;
 		float at(uint index);
 		
 		vectorOfBools::iterator begin()noexcept;
 		vectorOfBools::iterator end()noexcept;
-		float get_fitness() const noexcept;
+		[[nodiscard]] float get_fitness() const noexcept;
 		void set_fitness(float fitness) noexcept;
 	};
 	vectorOfBools add_node_dna(vectorOfBools dna, NodeSetUp nodeSetUp);
