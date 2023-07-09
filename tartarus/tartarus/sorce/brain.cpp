@@ -185,6 +185,6 @@ std::vector<gaia::BrainNode> gaia::normaleze(std::vector<gaia::BrainNode> nodsIn
 		node.setValue(node.getValue() / biggestValue);
 	});
 
-	//todo testa och testa även sett nods
+	//todo testa och testa även sett nods more
 	return nodsIn;
 }
