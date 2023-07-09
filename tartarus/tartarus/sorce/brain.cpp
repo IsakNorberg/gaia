@@ -86,6 +86,16 @@ float gaia::Brain::compute_trigger_value(std::vector<bool> DNA) const noexcept
 	return out.at(0);
 }
 
+float gaia::BrainNode::getValue()const
+{
+	return _value;
+}
+
+void gaia::BrainNode::setValue(float newValue)
+{
+	_value = newValue;
+}
+
 bool gaia::BrainNode::operator[](size_t index)
 {
 	assert(index < connections.size());
@@ -165,6 +175,16 @@ void gaia::NeuralNet::set_nods(std::vector<bool> DNA)
 
 std::vector<gaia::BrainNode> gaia::normaleze(std::vector<gaia::BrainNode> nodsIn)
 {
-	//todo next normalize della allt med de högsta talet?
-	return std::vector<BrainNode>();
+	auto largest = std::max_element(nodsIn.begin(), nodsIn.end(), [](gaia::BrainNode nodeA, gaia::BrainNode nodeB)
+	{
+		return nodeA.getValue() < nodeB.getValue();
+	});
+	float biggestValue = largest->getValue();
+	std::for_each(nodsIn.begin(), nodsIn.end(), [biggestValue](BrainNode& node)
+	{
+		node.setValue(node.getValue() / biggestValue);
+	});
+
+	//todo testa
+	return nodsIn;
 }
