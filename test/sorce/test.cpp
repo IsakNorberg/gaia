@@ -228,7 +228,43 @@ namespace gaia
 		}
 		TEST(BrinStruct, AssurtOnATotelyEmty)
 		{
-			EXPECT_DEATH(gaia::NodeSetUp n({ 0,0,0,0 }), "");
+			EXPECT_DEATH(gaia::NodeSetUp({ 0,0,0,0 }), "");
 		}
+
+		TEST(BrinSetUp, SeThatItSetsUpAmuntCorectly)
+		{
+			gaia::NodeSetUp setUp = gaia::NodeSetUp({ 3,8,3,2 });
+			gaia::Negativity negativety = gaia::Negativity::Positive;
+			gaia::BrainBluePrint bluprint = gaia::BrainBluePrint{ setUp,negativety };
+
+			gaia::Brain brain = gaia::Brain(bluprint);
+			auto test = brain.get_node_set_up();
+		
+			
+			EXPECT_TRUE(3 == test._inputNodeAmount);
+			EXPECT_TRUE(8 == test._hiddenNodeBreadth);
+			EXPECT_TRUE(3 == test._hiddenNodeLayers);
+			EXPECT_TRUE(2 == test._outputNodeAmount);
+		}
+		TEST(BrinSetUp, TestTheNormalize)
+		{
+			gaia::BrainNode n0;
+			n0.setValue(50.00f);
+			gaia::BrainNode n1;
+			n1.setValue(100.00f);
+			gaia::BrainNode n2;
+			n2.setValue(25.00f);
+			std::vector<BrainNode> vector = { n0,n1,n2 };
+			auto testVector = gaia::normaleze(vector);
+			EXPECT_TRUE(testVector.at(0).getValue() == 0.5f);
+			EXPECT_TRUE(testVector.at(1).getValue() == 1.0f);
+			EXPECT_TRUE(testVector.at(2).getValue() == 0.25f);
+			
+		}
+		TEST(BrinSetUp, itSeedsDNACorectly)
+		{
+			//TODO: IMplement
+		}
+
 	}
 }

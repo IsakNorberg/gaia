@@ -20,6 +20,8 @@ namespace gaia
 		float _value{ 0 };
 		std::vector<bool> connections;
 	public:
+		float getValue() const;
+		void setValue(float newValue);
 		bool operator[](size_t index);
 	};
 
@@ -77,7 +79,7 @@ namespace gaia
 	template <class Type>
 	std::vector<Type> erase_move_n(std::vector<Type> vector, size_t n) // todo test
 	{
-		auto it = std::rotate(vector.begin(), vector.end().begin() + n,vector.end());
+		auto it = std::rotate(vector.begin(), vector.begin() + n, vector.end());
 		vector.erase(it);
 		return vector;
 	};

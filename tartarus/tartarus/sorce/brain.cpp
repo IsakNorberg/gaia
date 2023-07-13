@@ -76,6 +76,8 @@ std::vector<float> gaia::Brain::run_compute(std::vector<bool> DAN) const noexcep
 { // Normalize 
 	return std::vector<float>{};
 }
+
+//Get the value of the biggest output , way?
 float gaia::Brain::compute_trigger_value(std::vector<bool> DNA) const noexcept
 {
 	std::vector<float> out = run_compute(DNA);
