@@ -20,10 +20,10 @@ namespace gaia
 	class BrainNode
 	{
 		float _value{ 0 };
-		std::vector<bool> connections;
+		std::vector<bool> _connections;
 	public:
-		float getValue() const;
-		void setValue(float newValue);
+		float get_value() const;
+		void set_value(float newValue);
 		bool operator[](size_t index);
 		std::vector<bool> set_conections(std::vector<bool> DNA); // todo use dif and macke tis: impl- is run over the amunt of conections an set then return the DNA used up
 		void resize(uint size);

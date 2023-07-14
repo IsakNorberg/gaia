@@ -249,16 +249,16 @@ namespace gaia
 		TEST(BrinSetUp, TestTheNormalize)
 		{
 			gaia::BrainNode n0;
-			n0.setValue(50.00f);
+			n0.set_value(50.00f);
 			gaia::BrainNode n1;
-			n1.setValue(100.00f);
+			n1.set_value(100.00f);
 			gaia::BrainNode n2;
-			n2.setValue(25.00f);
+			n2.set_value(25.00f);
 			std::vector<BrainNode> vector = { n0,n1,n2 };
 			auto testVector = gaia::normaleze(vector);
-			EXPECT_TRUE(testVector.at(0).getValue() == 0.5f);
-			EXPECT_TRUE(testVector.at(1).getValue() == 1.0f);
-			EXPECT_TRUE(testVector.at(2).getValue() == 0.25f);
+			EXPECT_TRUE(testVector.at(0).get_value() == 0.5f);
+			EXPECT_TRUE(testVector.at(1).get_value() == 1.0f);
+			EXPECT_TRUE(testVector.at(2).get_value() == 0.25f);
 			
 		}
 		TEST(BrinSetUp, itSeedsDNACorectly)
