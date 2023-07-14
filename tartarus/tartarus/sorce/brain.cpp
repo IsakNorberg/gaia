@@ -53,6 +53,13 @@ void gaia::Brain::seed_neural_net(std::vector<bool> DNA) noexcept
 	_nerualNet.set_nods(DNA);
 }
 
+std::vector<bool> gaia::Brain::get_dna_from_net()
+{
+	std::vector<bool> dna;
+	// nurralNet Get dna
+	return std::vector<bool>();
+}
+
 gaia::Brain::Brain(gaia::BrainBluePrint bluePrint) :_attribute(bluePrint._attribute), _nerualNet(bluePrint._setUp)
 {
 	const NodeSetUp setUp = bluePrint._setUp;
@@ -77,15 +84,26 @@ std::vector<float> gaia::Brain::run_compute(std::vector<bool> DAN) const noexcep
 	return std::vector<float>{};
 }
 
-//Get the value of the biggest output , way?
-float gaia::Brain::compute_trigger_value(std::vector<bool> DNA) const noexcept
+//Get the value of the biggest output: index and value.
+IndexValue gaia::Brain::compute_trigger_value(std::vector<bool> DNA) const noexcept
 {
 	std::vector<float> out = run_compute(DNA);
-	std::ranges::sort(out, [](float lhs, float rhs) // maby partiol sort
+	IndexValue biggest = { 0,0 };
+	for (size_t i = 0; i < out.size(); i++)
 	{
-		return lhs > rhs; // kolla vilket holl som är rätt
-	});
-	return out.at(0);
+		if(out[i]> biggest.second)
+		{
+			biggest = { i,out[i] };
+		}
+	}
+	return biggest;
+}
+
+bool gaia::Brain::verify_DNA(std::vector<bool> DNA)
+{
+	seed_neural_net(DNA);
+	// Do a get dna and comper
+	return false;
 }
 
 float gaia::BrainNode::getValue()const
@@ -170,9 +188,17 @@ gaia::NeuralNet::NeuralNet(NodeSetUp setUp)
 
 void gaia::NeuralNet::set_nods(std::vector<bool> DNA)
 {
+	// to do set the conactions corectly set all the conactins in the node not only one conaction
 	DNA = set_input_nodes(DNA);
 	DNA = set_hidden_nodes(DNA);
 	set_output_nodes(DNA);
+}
+
+std::vector<bool> gaia::NeuralNet::get_set_DNA() const
+{
+	_inputNodes
+	
+	return std::vector<bool>();
 }
 
 std::vector<gaia::BrainNode> gaia::normaleze(std::vector<gaia::BrainNode> nodsIn)

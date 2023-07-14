@@ -1,9 +1,11 @@
 #pragma once
 
 #include "random.h"
+using IndexValue = std::pair<uint, float>;
 
 namespace gaia
 {
+	
 	struct NodeSetUp
 	{
 		NodeSetUp(uint inputNodeAmount, uint hiddenNodeAmountPerLayers, uint hiddenNodeLayers, uint outputNodeAmount) noexcept;
@@ -23,6 +25,7 @@ namespace gaia
 		float getValue() const;
 		void setValue(float newValue);
 		bool operator[](size_t index);
+		std::vector<bool> set_conections(std::vector<bool> DNA, uint amunt); // todo use dif and macke tis: impl- is run over the amunt of conections an set then return the DNA used up
 	};
 
 	class NeuralNet
@@ -41,6 +44,7 @@ namespace gaia
 	public:
 		NeuralNet(NodeSetUp setUp);
 		void set_nods(std::vector<bool> DNA);
+		std::vector<bool> get_set_DNA() const;
 	};
 
 	enum class Negativity
@@ -64,6 +68,7 @@ namespace gaia
 		Negativity _attribute;
 		std::vector<float> _input;
 		NeuralNet _nerualNet;
+		std::vector<bool> get_dna_from_net();
 
 	public:
 		Brain(BrainBluePrint bluePrint);
@@ -71,8 +76,8 @@ namespace gaia
 		void seed_neural_net(std::vector<bool> DNA) noexcept;
 		void set_input(std::vector<float> input) noexcept;
 		std::vector<float> run_compute(std::vector<bool> DNA) const noexcept;
-		float compute_trigger_value(std::vector<bool> DNA) const noexcept;
-
+		IndexValue compute_trigger_value(std::vector<bool> DNA) const noexcept;
+		bool verify_DNA(std::vector<bool> DNA);
 	};
 	std::vector<BrainNode> normaleze(std::vector<gaia::BrainNode> nodsIn); //TODO: implamant
 
