@@ -106,25 +106,43 @@ bool gaia::Brain::verify_DNA(std::vector<bool> DNA)
 	return false;
 }
 
-float gaia::BrainNode::getValue()const
+float gaia::BrainNode::get_value()const
 {
 	return _value;
 }
 
-void gaia::BrainNode::setValue(float newValue)
+void gaia::BrainNode::set_value(float newValue)
 {
 	_value = newValue;
 }
 
 bool gaia::BrainNode::operator[](size_t index)
 {
-	assert(index < connections.size());
-	return connections.at(index);
+	assert(index < _connections.size());
+	return _connections.at(index);
+}
+
+std::vector<bool> gaia::BrainNode::set_conections(std::vector<bool> DNA)
+{
+	_connections = DNA;
+	uint index = 0;
+	std::for_each(_connections.begin(), _connections.end(), [&index, DNA](bool& b) {
+		b = DNA[index++];
+	});
+	return erase_move_n(DNA,_connections.size()); // se if this is a one off error
+}
+
+void gaia::BrainNode::resize(uint size)
+{
+	_connections.resize(size);
 }
 
 void gaia::NeuralNet::set_input_node_amount(uint amount)
 {
 	_inputNodes.resize(amount);
+	std::for_each(_inputNodes.begin(), _inputNodes.end(), [amount](BrainNode& n) {
+		n.resize(amount);
+	});
 }
 
 void gaia::NeuralNet::set_output_node_amount(uint amount)
@@ -142,6 +160,9 @@ void gaia::NeuralNet::set_hidden_node_breadth(uint amount)
 	for (auto& vector : _hiddenNodes)
 	{
 		vector.resize(amount);
+		std::for_each(vector.begin(), vector.end(), [amount](BrainNode& n) {
+			n.resize(amount);
+		});
 	}
 }
 
@@ -150,7 +171,7 @@ std::vector<bool> gaia::NeuralNet::set_input_nodes(std::vector<bool> nodeConacti
 	uint i = 0;
 	for (BrainNode& node : _inputNodes)
 	{
-		node[nodeConactions[i++]];
+		nodeConactions = node.set_conections(nodeConactions);
 	}
 	return gaia::erase_move_n(nodeConactions, i);
 }
@@ -162,7 +183,7 @@ std::vector<bool> gaia::NeuralNet::set_hidden_nodes(std::vector<bool> nodeConact
 		uint i = 0;
 		for (BrainNode& node : hiddenNodeLayer)
 		{
-			node[nodeConactions[i++]];
+			nodeConactions = node.set_conections(nodeConactions);
 		}
 		nodeConactions = gaia::erase_move_n(nodeConactions, i);
 	}
@@ -205,12 +226,12 @@ std::vector<gaia::BrainNode> gaia::normaleze(std::vector<gaia::BrainNode> nodsIn
 {
 	auto largest = std::max_element(nodsIn.begin(), nodsIn.end(), [](gaia::BrainNode nodeA, gaia::BrainNode nodeB)
 	{
-		return nodeA.getValue() < nodeB.getValue();
+		return nodeA.get_value() < nodeB.get_value();
 	});
-	float biggestValue = largest->getValue();
+	float biggestValue = largest->get_value();
 	std::for_each(nodsIn.begin(), nodsIn.end(), [biggestValue](BrainNode& node)
 	{
-		node.setValue(node.getValue() / biggestValue);
+		node.set_value(node.get_value() / biggestValue);
 	});
 
 	//todo testa och testa även sett nods more more 
