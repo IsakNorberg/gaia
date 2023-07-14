@@ -25,7 +25,8 @@ namespace gaia
 		float getValue() const;
 		void setValue(float newValue);
 		bool operator[](size_t index);
-		std::vector<bool> set_conections(std::vector<bool> DNA, uint amunt); // todo use dif and macke tis: impl- is run over the amunt of conections an set then return the DNA used up
+		std::vector<bool> set_conections(std::vector<bool> DNA); // todo use dif and macke tis: impl- is run over the amunt of conections an set then return the DNA used up
+		void resize(uint size);
 	};
 
 	class NeuralNet
