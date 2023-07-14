@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="sorce\test.cpp.vsspell" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\tartarus\tartarus\tartarus.vcxproj">
