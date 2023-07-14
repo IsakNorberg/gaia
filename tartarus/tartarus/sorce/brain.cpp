@@ -217,7 +217,7 @@ void gaia::NeuralNet::set_nods(std::vector<bool> DNA)
 
 std::vector<bool> gaia::NeuralNet::get_set_DNA() const
 {
-	_inputNodes
+	
 	
 	return std::vector<bool>();
 }
