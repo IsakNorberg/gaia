@@ -48,16 +48,14 @@ void gaia::NodeSetUp::correct_set_up_check(uint inputNodeAmount, uint hiddenNode
 	}
 }
 
-void gaia::Brain::seed_neural_net(std::vector<bool> DNA) noexcept
+void gaia::Brain::seed_neural_net(vectorOfBools DNA) noexcept
 {
 	_nerualNet.set_nods(DNA);
 }
 
-std::vector<bool> gaia::Brain::get_dna_from_net()
+vectorOfBools gaia::Brain::get_dna_from_net()
 {
-	std::vector<bool> dna;
-	// nurralNet Get dna
-	return std::vector<bool>();
+	return _nerualNet.get_set_DNA();
 }
 
 gaia::Brain::Brain(gaia::BrainBluePrint bluePrint) :_attribute(bluePrint._attribute), _nerualNet(bluePrint._setUp)
@@ -74,20 +72,23 @@ gaia::NodeSetUp gaia::Brain::get_node_set_up()const noexcept
 	return { _inputNodeAmount, _hiddenNodeBreadth, _hiddenNodeLayers, _outputNodeAmount };
 }
 
-void gaia::Brain::set_input(std::vector<float> input) noexcept
+void gaia::Brain::set_input(vectorOfFlots input) noexcept
 {
 	_input = input;
 }
 
-std::vector<float> gaia::Brain::run_compute(std::vector<bool> DAN) const noexcept
-{ // Normalize 
+std::vector<float> gaia::Brain::run_compute(vectorOfBools DNA, vectorOfFlots input)
+{ 
+	seed_neural_net(DNA);
+	verify_DNA(DNA);
+
 	return std::vector<float>{};
 }
 
 //Get the value of the biggest output: index and value.
-IndexValue gaia::Brain::compute_trigger_value(std::vector<bool> DNA) const noexcept
+IndexValue gaia::Brain::compute_trigger_value(vectorOfBools DNA, vectorOfFlots input)
 {
-	std::vector<float> out = run_compute(DNA);
+	std::vector<float> out = run_compute(DNA, input);
 	IndexValue biggest = { 0,0 };
 	for (size_t i = 0; i < out.size(); i++)
 	{
@@ -99,7 +100,7 @@ IndexValue gaia::Brain::compute_trigger_value(std::vector<bool> DNA) const noexc
 	return biggest;
 }
 
-bool gaia::Brain::verify_DNA(std::vector<bool> DNA)
+void gaia::Brain::verify_DNA(vectorOfBools DNA)
 {
 	seed_neural_net(DNA);
 	// Do a get dna and comper
@@ -122,7 +123,12 @@ bool gaia::BrainNode::operator[](size_t index)
 	return _connections.at(index);
 }
 
-std::vector<bool> gaia::BrainNode::set_conections(std::vector<bool> DNA)
+vectorOfBools gaia::BrainNode::get_DNA() const noexcept
+{
+	return this->_connections;
+}
+
+vectorOfBools gaia::BrainNode::set_conections(vectorOfBools DNA)
 {
 	_connections = DNA;
 	uint index = 0;
@@ -166,7 +172,7 @@ void gaia::NeuralNet::set_hidden_node_breadth(uint amount)
 	}
 }
 
-std::vector<bool> gaia::NeuralNet::set_input_nodes(std::vector<bool> nodeConactions)
+vectorOfBools gaia::NeuralNet::set_input_nodes(vectorOfBools nodeConactions)
 {
 	uint i = 0;
 	for (BrainNode& node : _inputNodes)
@@ -176,7 +182,7 @@ std::vector<bool> gaia::NeuralNet::set_input_nodes(std::vector<bool> nodeConacti
 	return gaia::erase_move_n(nodeConactions, i);
 }
 
-std::vector<bool> gaia::NeuralNet::set_hidden_nodes(std::vector<bool> nodeConactions)
+vectorOfBools gaia::NeuralNet::set_hidden_nodes(vectorOfBools nodeConactions)
 {
 	for (std::vector<BrainNode>& hiddenNodeLayer : _hiddenNodes)
 	{
@@ -190,7 +196,7 @@ std::vector<bool> gaia::NeuralNet::set_hidden_nodes(std::vector<bool> nodeConact
 	return nodeConactions;
 }
 
-void gaia::NeuralNet::set_output_nodes(std::vector<bool> nodeConactions)
+void gaia::NeuralNet::set_output_nodes(vectorOfBools nodeConactions)
 {
 	uint i = 0;
 	for (BrainNode& node : _outputNodes)
@@ -207,19 +213,24 @@ gaia::NeuralNet::NeuralNet(NodeSetUp setUp)
 	set_hidden_node_breadth(setUp._hiddenNodeBreadth);
 }
 
-void gaia::NeuralNet::set_nods(std::vector<bool> DNA)
+void gaia::NeuralNet::set_nods(vectorOfBools DNA)
 {
-	// to do set the conactions corectly set all the conactins in the node not only one conaction
 	DNA = set_input_nodes(DNA);
 	DNA = set_hidden_nodes(DNA);
 	set_output_nodes(DNA);
 }
 
-std::vector<bool> gaia::NeuralNet::get_set_DNA() const
+vectorOfBools gaia::NeuralNet::get_set_DNA() const
 {
-	
-	
-	return std::vector<bool>();
+	vectorOfBools DNA; 
+	auto get_DNA_Node = [&DNA](BrainNode b) {
+		DNA.append_range(b.get_DNA());
+	};
+	std::for_each(_inputNodes.begin(), _inputNodes.end(), get_DNA_Node);
+	std::for_each(_hiddenNodes.begin(), _hiddenNodes.end(), [&DNA, get_DNA_Node](std::vector<BrainNode> v) {
+		std::for_each(v.begin(), v.end(), get_DNA_Node);
+	});
+	return DNA;
 }
 
 std::vector<gaia::BrainNode> gaia::normaleze(std::vector<gaia::BrainNode> nodsIn)

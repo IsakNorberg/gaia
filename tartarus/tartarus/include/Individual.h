@@ -5,7 +5,7 @@
 
 #include "brain.h"
 #include "random.h"
-using  vectorOfBools = std::vector<bool>;
+using  vectorOfBools = vectorOfBools;
 
 namespace gaia
 {
