@@ -104,7 +104,7 @@ void gaia::Brain::verify_DNA(vectorOfBools DNA)
 {
 	seed_neural_net(DNA);
 	// Do a get dna and comper
-	return false;
+
 }
 
 float gaia::BrainNode::get_value()const
