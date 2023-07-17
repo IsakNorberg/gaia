@@ -243,24 +243,41 @@ namespace gaia
 			EXPECT_TRUE(3 == test._hiddenNodeLayers);
 			EXPECT_TRUE(2 == test._outputNodeAmount);
 		}
+
 		TEST(BrinSetUp, TestTheNormalize)
 		{
 			gaia::BrainNode n0;
-			n0.get_value();
-			/*gaia::BrainNode n1;
+			n0.set_value(50.00f);
+			gaia::BrainNode n1;
 			n1.set_value(100.00f);
 			gaia::BrainNode n2;
-			n2.set_value(25.00f);*/
-			/*std::vector<BrainNode> vector = { n0,n1,n2 };
+			n2.set_value(25.00f);
+			std::vector<BrainNode> vector = { n0,n1,n2 };
 			std::vector<BrainNode> testVector = gaia::normaleze(vector);
 			EXPECT_TRUE(testVector.at(0).get_value() == 0.5f);
 			EXPECT_TRUE(testVector.at(1).get_value() == 1.0f);
-			EXPECT_TRUE(testVector.at(2).get_value() == 0.25f);*/
+			EXPECT_TRUE(testVector.at(2).get_value() == 0.25f);
 		}
 		TEST(BrinSetUp, itSeedsDNACorectly)
-		{
+	    {
+			Individual i({ 3,5,5,4 });
 
-			//TODO: IMplement
+			gaia::NodeSetUp setUp = gaia::NodeSetUp({ 3,5,5,4 });
+			gaia::Negativity negativety = gaia::Negativity::Positive;
+			gaia::BrainBluePrint bluprint = gaia::BrainBluePrint{ setUp,negativety };
+
+			gaia::Brain brain = gaia::Brain(bluprint);
+
+			try
+			{
+				 // todo fix seting is wring all the nods get all the conections S mby in the re sising följ bara setting av nodsS
+				brain.run_compute(i.get_DNA(), { 0.5,0.7f,0.9f });
+			}
+			catch (const std::runtime_error&)
+			{
+				EXPECT_FALSE(true);
+			}
+			EXPECT_FALSE(false);
 		}
 
 	}

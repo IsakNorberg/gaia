@@ -24,12 +24,13 @@ namespace gaia
 		float _value{ 0.f };
 		vectorOfBools _connections;
 	public:
-		float get_value()const;
-		void set_value(float newValue);
+		float get_value() const noexcept;
+		void set_value(float newValue) noexcept;
 		bool operator[](size_t index);
 		vectorOfBools get_DNA() const noexcept;
 		vectorOfBools set_conections(vectorOfBools DNA); // todo use dif and macke tis: impl- is run over the amunt of conections an set then return the DNA used up
 		void resize(uint size);
+
 	};
 
 	class NeuralNet
@@ -44,7 +45,6 @@ namespace gaia
 
 		vectorOfBools set_input_nodes(vectorOfBools nodeConactions);
 		vectorOfBools set_hidden_nodes(vectorOfBools nodeConactions);
-		void set_output_nodes(vectorOfBools nodeConactions);
 	public:
 		vectorOfFlots run(vectorOfFlots input);
 		NeuralNet(NodeSetUp setUp);
@@ -75,7 +75,7 @@ namespace gaia
 		NeuralNet _nerualNet;
 		vectorOfBools get_dna_from_net();
 		void verify_DNA(vectorOfBools DNA);
-		void seed_neural_net(vectorOfBools DNA) noexcept;
+		void seed_neural_net(vectorOfBools DNA);
 
 	public:
 		Brain(BrainBluePrint bluePrint);

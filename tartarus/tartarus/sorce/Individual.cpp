@@ -1,7 +1,7 @@
 #include "Individual.h"
 
 //make new konstructer
-gaia::Individual::Individual(NodeSetUp nodeSetUp) noexcept
+gaia::Individual::Individual(NodeSetUp nodeSetUp)
 {
 	_dna = add_node_dna(_dna, nodeSetUp);
 }
@@ -16,6 +16,11 @@ float gaia::Individual::at(uint index)
 {
 	assert(_dna.size() > index);
 	return _dna.at(index);
+}
+
+vectorOfBools gaia::Individual::get_DNA() const noexcept
+{
+	return _dna;
 }
 
 vectorOfBools::iterator gaia::Individual::begin() noexcept

@@ -5,7 +5,6 @@
 
 #include "brain.h"
 #include "random.h"
-using  vectorOfBools = vectorOfBools;
 
 namespace gaia
 {
@@ -14,10 +13,10 @@ namespace gaia
 		float _fitness{0};
 		vectorOfBools _dna;
 	public:
-		Individual(NodeSetUp nodeSetUp)  noexcept;
+		Individual(NodeSetUp nodeSetUp);
 		[[nodiscard]] size_t size()const noexcept;
 		float at(uint index);
-		
+		vectorOfBools get_DNA()const noexcept;
 		vectorOfBools::iterator begin()noexcept;
 		vectorOfBools::iterator end()noexcept;
 		[[nodiscard]] float get_fitness() const noexcept;
