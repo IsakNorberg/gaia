@@ -89,7 +89,7 @@ std::vector<float> gaia::Brain::run_compute(vectorOfBools DNA, vectorOfFlots inp
 IndexValue gaia::Brain::compute_trigger_value(vectorOfBools DNA, vectorOfFlots input)
 {
 	std::vector<float> out = run_compute(DNA, input);
-	IndexValue biggest = { 0,0 };
+	IndexValue biggest(0, 0);
 	for (size_t i = 0; i < out.size(); i++)
 	{
 		if(out[i]> biggest.second)
@@ -112,7 +112,7 @@ float gaia::BrainNode::get_value()const
 	return _value;
 }
 
-void gaia::BrainNode::set_value(float newValue)
+void gaia::BrainNode::set_value(float newValue) 
 {
 	_value = newValue;
 }
@@ -132,9 +132,11 @@ vectorOfBools gaia::BrainNode::set_conections(vectorOfBools DNA)
 {
 	_connections = DNA;
 	uint index = 0;
-	std::for_each(_connections.begin(), _connections.end(), [&index, DNA](bool& b) {
-		b = DNA[index++];
-	});
+
+	for (size_t i = 0; i < _connections.size()-1; i++)
+	{
+		_connections[i] = DNA.at(i);
+	}
 	return erase_move_n(DNA,_connections.size()); // se if this is a one off error
 }
 

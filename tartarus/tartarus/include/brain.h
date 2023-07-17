@@ -21,10 +21,10 @@ namespace gaia
 
 	class BrainNode
 	{
-		float _value{ 0 };
+		float _value{ 0.f };
 		vectorOfBools _connections;
 	public:
-		float get_value() const;
+		float get_value()const;
 		void set_value(float newValue);
 		bool operator[](size_t index);
 		vectorOfBools get_DNA() const noexcept;
