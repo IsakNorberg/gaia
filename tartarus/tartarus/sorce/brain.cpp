@@ -135,7 +135,7 @@ vectorOfBools gaia::BrainNode::get_DNA() const noexcept
 	return this->_connections;
 }
 
-vectorOfBools gaia::BrainNode::set_conections(vectorOfBools DNA)
+void gaia::BrainNode::set_conections(vectorOfBools DNA)
 {
 	_connections = DNA;
 
@@ -143,12 +143,17 @@ vectorOfBools gaia::BrainNode::set_conections(vectorOfBools DNA)
 	{
 		_connections.at( i) = DNA.at(i);
 	}
-	return erase_move_n(DNA,_connections.size()); // se if this is a one off error
-}
+
+	}
 
 void gaia::BrainNode::resize(uint size)
 {
 	_connections.resize(size);
+}
+
+size_t gaia::BrainNode::size() const noexcept
+{
+	return _connections.size();
 }
 
 void gaia::NeuralNet::set_input_node_amount(uint amount)
@@ -182,31 +187,31 @@ void gaia::NeuralNet::set_hidden_node_breadth(uint amount)
 
 vectorOfBools gaia::NeuralNet::set_input_nodes(vectorOfBools nodeConactions)
 {
-	uint i = 0;
 	for (BrainNode& node : _inputNodes)
 	{
 		// shold only be the ones that is for the inpoot nods, so oly take the first five in like a move then set
-		nodeConactions = node.set_conections(nodeConactions);
-		i++;
+		vectorOfBools temp;
+		std::copy_n(nodeConactions.begin(), node.size(), std::back_inserter(temp));
+		node.set_conections(temp);
+		nodeConactions = gaia::erase_move_n(nodeConactions, node.size());
 	}
-	return gaia::erase_move_n(nodeConactions, i);
+	return nodeConactions;
 }
 
 vectorOfBools gaia::NeuralNet::set_hidden_nodes(vectorOfBools nodeConactions)
 {
 	for (std::vector<BrainNode>& hiddenNodeLayer : _hiddenNodes)
 	{
-		uint i = 0;
 		for (BrainNode& node : hiddenNodeLayer)
 		{
-			nodeConactions = node.set_conections(nodeConactions);
-			i++;
+			vectorOfBools temp;
+			std::copy_n(nodeConactions.begin(), node.size(), std::back_inserter(temp));
+			node.set_conections(temp);
+			nodeConactions = gaia::erase_move_n(nodeConactions, node.size());
 		}
-		nodeConactions = gaia::erase_move_n(nodeConactions, i);
 	}
 	return nodeConactions;
 }
-
 
 vectorOfFlots gaia::NeuralNet::run(vectorOfFlots input)
 {

@@ -28,8 +28,9 @@ namespace gaia
 		void set_value(float newValue) noexcept;
 		bool operator[](size_t index);
 		vectorOfBools get_DNA() const noexcept;
-		vectorOfBools set_conections(vectorOfBools DNA); // todo use dif and macke tis: impl- is run over the amunt of conections an set then return the DNA used up
+		void set_conections(vectorOfBools DNA); // todo use dif and macke tis: impl- is run over the amunt of conections an set then return the DNA used up
 		void resize(uint size);
+		size_t size() const noexcept;
 
 	};
 

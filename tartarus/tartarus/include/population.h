@@ -23,7 +23,6 @@ namespace gaia
 		//genaration 
 		
 
-
 	public:
 		//Population(); //take blue print 
 		//at brain
