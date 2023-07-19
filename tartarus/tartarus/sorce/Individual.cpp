@@ -53,7 +53,7 @@ vectorOfBools gaia::add_node_dna(vectorOfBools dna, NodeSetUp nodeSetUp)
 		hiddenPerLayers * hiddenPerLayers * (nodeSetUp._hiddenNodeLayers - 1) +
 		nodeSetUp._outputNodeAmount * hiddenPerLayers;
 	dna.resize(dnaSize);
-	std::ranges::generate(dna, [] {return get_random_bool(); });
+(	std::ranges::generate(dna, [] {return get_random_bool(); });
 	return dna;
 }
 

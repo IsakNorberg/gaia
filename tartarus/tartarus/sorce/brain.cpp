@@ -189,7 +189,6 @@ vectorOfBools gaia::NeuralNet::set_input_nodes(vectorOfBools nodeConactions)
 {
 	for (BrainNode& node : _inputNodes)
 	{
-		// shold only be the ones that is for the inpoot nods, so oly take the first five in like a move then set
 		vectorOfBools temp;
 		std::copy_n(nodeConactions.begin(), node.size(), std::back_inserter(temp));
 		node.set_conections(temp);
@@ -213,9 +212,32 @@ vectorOfBools gaia::NeuralNet::set_hidden_nodes(vectorOfBools nodeConactions)
 	return nodeConactions;
 }
 
-vectorOfFlots gaia::NeuralNet::run(vectorOfFlots input)
+
+void gaia::NeuralNet::calculate_hidden_to_hidden()
+{
+}
+
+vectorOfFlots gaia::NeuralNet::calculade_hidden_to_out()
 {
 	return vectorOfFlots();
+}
+
+vectorOfFlots gaia::NeuralNet::run(vectorOfFlots input)
+{
+
+	return vectorOfFlots();
+}
+
+void gaia::NeuralNet::calculate_in_to_hidden(vectorOfFlots input)
+{
+	for (size_t i = 0; i < input.size(); i++)
+	{
+		_inputNodes[i].set_value(input.at(i));
+	}
+	for (size_t i = 0; i < _hiddenNodes.at(0).size(); i++)
+	{
+		//todo calculatte mby ta förata hitta första i contectons som ska sättas till den adrta aka true och addera den bara
+	}
 }
 
 gaia::NeuralNet::NeuralNet(NodeSetUp setUp)
@@ -230,7 +252,6 @@ void gaia::NeuralNet::set_nods(vectorOfBools DNA)
 {
 	DNA = set_input_nodes(DNA);
 	DNA = set_hidden_nodes(DNA);
-
 }
 
 vectorOfBools gaia::NeuralNet::get_set_DNA() const

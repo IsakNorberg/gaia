@@ -28,7 +28,7 @@ namespace gaia
 		void set_value(float newValue) noexcept;
 		bool operator[](size_t index);
 		vectorOfBools get_DNA() const noexcept;
-		void set_conections(vectorOfBools DNA); // todo use dif and macke tis: impl- is run over the amunt of conections an set then return the DNA used up
+		void set_conections(vectorOfBools DNA);
 		void resize(uint size);
 		size_t size() const noexcept;
 
@@ -43,6 +43,10 @@ namespace gaia
 		void set_output_node_amount(uint amount);
 		void set_hidden_node_layers(uint amount);
 		void set_hidden_node_breadth(uint amount);
+
+		void calculate_hidden_to_hidden();
+		vectorOfFlots calculade_hidden_to_out();
+		void calculate_in_to_hidden(vectorOfFlots input);
 
 		vectorOfBools set_input_nodes(vectorOfBools nodeConactions);
 		vectorOfBools set_hidden_nodes(vectorOfBools nodeConactions);
