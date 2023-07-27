@@ -81,7 +81,7 @@ std::vector<float> gaia::Brain::run_compute(vectorOfBools DNA, vectorOfFlots inp
 { 
 	seed_neural_net(DNA);
 	verify_DNA(DNA);
-	return _nerualNet.run(_input);
+	return _nerualNet.run(input);
 
 }
 
@@ -144,7 +144,7 @@ void gaia::BrainNode::set_conections(vectorOfBools DNA)
 		_connections.at( i) = DNA.at(i);
 	}
 
-	}
+}
 
 void gaia::BrainNode::resize(uint size)
 {
@@ -164,8 +164,8 @@ void gaia::BrainNode::add_value(float number)
 void gaia::NeuralNet::set_input_node_amount(uint amount)
 {
 	_inputNodes.resize(amount);
-	std::for_each(_inputNodes.begin(), _inputNodes.end(), [amount](BrainNode& n) {
-		n.resize(amount);
+	std::for_each(_inputNodes.begin(), _inputNodes.end(), [&](BrainNode& n) {
+		n.resize((uint)_hiddenNodes.at(0).size());
 	});
 }
 
@@ -188,6 +188,10 @@ void gaia::NeuralNet::set_hidden_node_breadth(uint amount)
 			n.resize(amount);
 		});
 	}
+	auto vector = _hiddenNodes.at(_hiddenNodes.size() - 1);
+	std::for_each(vector.begin(), vector.end(), [&](BrainNode& n) {
+		n.resize((uint)_outputNodes.size());
+	});
 }
 
 vectorOfBools gaia::NeuralNet::set_input_nodes(vectorOfBools nodeConactions)
@@ -228,7 +232,7 @@ vectorOfFlots gaia::NeuralNet::calculade_hidden_to_out()
 }
 
 vectorOfFlots gaia::NeuralNet::run(vectorOfFlots input)
-{
+{ // to do inplement
 	calculate_in_to_hidden(input);
 	calculate_hidden_to_hidden();
 	return calculade_hidden_to_out();
@@ -236,24 +240,24 @@ vectorOfFlots gaia::NeuralNet::run(vectorOfFlots input)
 
 void gaia::NeuralNet::calculate_in_to_hidden(vectorOfFlots input)
 {
-	brainNodeVector& firstHiddenNode = _hiddenNodes[0];
+	std::vector<BrainNode>& firstHiddenNode = _hiddenNodes.at(0);
 	for (size_t i = 0; i < input.size(); i++)
 	{
 		_inputNodes[i].set_value(input.at(i));
 	}
-	for (brainNodeVector& node : _inputNodes)
+	for (const BrainNode node : _inputNodes)
 	{
 		firstHiddenNode = add_number_to_nodes(node, firstHiddenNode);
 	}
-	//todo test
+	firstHiddenNode = normaleze(firstHiddenNode);
 }
 
 gaia::NeuralNet::NeuralNet(NodeSetUp setUp)
 {
-	set_input_node_amount(setUp._inputNodeAmount);
 	set_output_node_amount(setUp._outputNodeAmount);
 	set_hidden_node_layers(setUp._hiddenNodeLayers);
 	set_hidden_node_breadth(setUp._hiddenNodeBreadth);
+	set_input_node_amount(setUp._inputNodeAmount);
 }
 
 void gaia::NeuralNet::set_nods(vectorOfBools DNA)
@@ -275,14 +279,14 @@ vectorOfBools gaia::NeuralNet::get_set_DNA() const
 	return DNA;
 }
 
-brainNodeVector gaia::normaleze(brainNodeVector nodsIn)
+std::vector<gaia::BrainNode> gaia::normaleze(std::vector<BrainNode> nodsIn)
 {
 	auto largest = std::max_element(nodsIn.begin(), nodsIn.end(), [&](gaia::BrainNode nodeA, gaia::BrainNode nodeB)
 	{
 		return nodeA.get_value() < nodeB.get_value();
 	});
 	const float biggestValue = largest->get_value();
-	std::for_each(nodsIn.begin(), nodsIn.end(), [biggestValue](BrainNode& node)
+	std::for_each(nodsIn.begin(), nodsIn.end(), [biggestValue](gaia::BrainNode& node)
 	{
 		node.set_value(node.get_value() / biggestValue);
 	});
@@ -290,16 +294,14 @@ brainNodeVector gaia::normaleze(brainNodeVector nodsIn)
 	return nodsIn;
 }
 
-brainNodeVector gaia::add_number_to_nodes(gaia::BrainNode inNode, brainNodeVector inVector)
+std::vector<gaia::BrainNode> gaia::add_number_to_nodes(gaia::BrainNode inNode, std::vector<BrainNode> inVector)
 {
-	for (gaia::BrainNode& node: inVector)
+	vectorOfBools DNA = inNode.get_DNA();
+	for (size_t i = 0; i < inVector.size(); i++)
 	{
-		for (bool conaction : inNode.get_DNA())
+		if (DNA.at(i))
 		{
-			if (conaction)
-			{
-				node.add_value(inNode.get_value());
-			}
+			inVector[i].add_value(inNode.get_value());
 		}
 	}
 	return inVector;

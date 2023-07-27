@@ -5,7 +5,7 @@
 using IndexValue = std::pair<uint, float>;
 using vectorOfBools = std::vector<bool>;
 using vectorOfFlots = std::vector<float>;
-using brainNodeVector = brainNodeVector;
+
 namespace gaia
 {
 	
@@ -91,8 +91,9 @@ namespace gaia
 		std::vector<float> run_compute(vectorOfBools DNA, vectorOfFlots input) ;
 		IndexValue compute_trigger_value(vectorOfBools DNA, vectorOfFlots input);
 	};
-	brainNodeVector normaleze(brainNodeVector nodsIn); 
-	brainNodeVector add_number_to_nodes(gaia::BrainNode inNode, brainNodeVector inVector);
+	
+	std::vector<BrainNode> normaleze(std::vector<BrainNode> nodsIn); 
+	std::vector<BrainNode> add_number_to_nodes(gaia::BrainNode inNode, std::vector<BrainNode> inVector);
 	template <class Type>
 	std::vector<Type> erase_move_n(std::vector<Type> vector, size_t n) // todo test
 	{
@@ -100,4 +101,5 @@ namespace gaia
 		vector.erase(it);
 		return vector;
 	};
+	
 }

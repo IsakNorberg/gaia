@@ -270,7 +270,7 @@ namespace gaia
 
 			try
 			{
-				brain.run_compute(i.get_DNA(), { 0.5,0.7f,0.9f });
+				brain.run_compute(i.get_DNA(), { 0.5f,0.7f,0.9f });
 			}
 			catch (const std::runtime_error&)
 			{
@@ -289,7 +289,7 @@ namespace gaia
 
 			gaia::Brain brain = gaia::Brain(bluprint);
 
-			brain.run_compute(i.get_DNA(), { 0.5,0.7f,0.9f });
+			brain.run_compute(i.get_DNA(), { 0.5f,0.7f,0.9f });
 			EXPECT_FALSE(false);
 		}
 	}
