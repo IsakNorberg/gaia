@@ -156,6 +156,11 @@ size_t gaia::BrainNode::size() const noexcept
 	return _connections.size();
 }
 
+void gaia::BrainNode::add_value(float number)
+{
+	_value = _value + number;
+}
+
 void gaia::NeuralNet::set_input_node_amount(uint amount)
 {
 	_inputNodes.resize(amount);
@@ -224,20 +229,23 @@ vectorOfFlots gaia::NeuralNet::calculade_hidden_to_out()
 
 vectorOfFlots gaia::NeuralNet::run(vectorOfFlots input)
 {
-
-	return vectorOfFlots();
+	calculate_in_to_hidden(input);
+	calculate_hidden_to_hidden();
+	return calculade_hidden_to_out();
 }
 
 void gaia::NeuralNet::calculate_in_to_hidden(vectorOfFlots input)
 {
+	brainNodeVector& firstHiddenNode = _hiddenNodes[0];
 	for (size_t i = 0; i < input.size(); i++)
 	{
 		_inputNodes[i].set_value(input.at(i));
 	}
-	for (size_t i = 0; i < _hiddenNodes.at(0).size(); i++)
+	for (brainNodeVector& node : _inputNodes)
 	{
-		//todo calculatte mby ta förata hitta första i contectons som ska sättas till den adrta aka true och addera den bara
+		firstHiddenNode = add_number_to_nodes(node, firstHiddenNode);
 	}
+	//todo test
 }
 
 gaia::NeuralNet::NeuralNet(NodeSetUp setUp)
@@ -267,9 +275,9 @@ vectorOfBools gaia::NeuralNet::get_set_DNA() const
 	return DNA;
 }
 
-std::vector<gaia::BrainNode> gaia::normaleze(std::vector<gaia::BrainNode> nodsIn)
+brainNodeVector gaia::normaleze(brainNodeVector nodsIn)
 {
-	auto largest = std::max_element(nodsIn.begin(), nodsIn.end(), [](gaia::BrainNode nodeA, gaia::BrainNode nodeB)
+	auto largest = std::max_element(nodsIn.begin(), nodsIn.end(), [&](gaia::BrainNode nodeA, gaia::BrainNode nodeB)
 	{
 		return nodeA.get_value() < nodeB.get_value();
 	});
@@ -279,6 +287,20 @@ std::vector<gaia::BrainNode> gaia::normaleze(std::vector<gaia::BrainNode> nodsIn
 		node.set_value(node.get_value() / biggestValue);
 	});
 
-	//todo testa och testa även sett nods more more 
 	return nodsIn;
+}
+
+brainNodeVector gaia::add_number_to_nodes(gaia::BrainNode inNode, brainNodeVector inVector)
+{
+	for (gaia::BrainNode& node: inVector)
+	{
+		for (bool conaction : inNode.get_DNA())
+		{
+			if (conaction)
+			{
+				node.add_value(inNode.get_value());
+			}
+		}
+	}
+	return inVector;
 }

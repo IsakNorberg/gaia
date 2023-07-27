@@ -270,7 +270,6 @@ namespace gaia
 
 			try
 			{
-				 // todo fix seting is wring all the nods get all the conections S mby in the re sising följ bara setting av nodsS
 				brain.run_compute(i.get_DNA(), { 0.5,0.7f,0.9f });
 			}
 			catch (const std::runtime_error&)
@@ -279,6 +278,19 @@ namespace gaia
 			}
 			EXPECT_FALSE(false);
 		}
+		TEST(BrainRun, calculateCorectly)
+		{
+			//todo: beter test
+			Individual i({ 3,5,5,4 });
 
+			gaia::NodeSetUp setUp = gaia::NodeSetUp({ 3,5,5,4 });
+			gaia::Negativity negativety = gaia::Negativity::Positive;
+			gaia::BrainBluePrint bluprint = gaia::BrainBluePrint{ setUp,negativety };
+
+			gaia::Brain brain = gaia::Brain(bluprint);
+
+			brain.run_compute(i.get_DNA(), { 0.5,0.7f,0.9f });
+			EXPECT_FALSE(false);
+		}
 	}
 }

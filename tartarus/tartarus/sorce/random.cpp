@@ -46,7 +46,7 @@ namespace gaia
 
 	uint get_random_repeatable(uint range) noexcept
 	{
-(		return static_cast<uint>(random(range));
+		return static_cast<uint>(random(range));
 	}
 
 	float get_random_range_normalized_posetiv(uint precision) noexcept
