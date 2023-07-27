@@ -32,6 +32,7 @@ namespace gaia
 		void set_conections(vectorOfBools DNA);
 		void resize(uint size);
 		size_t size() const noexcept;
+		void add_value(float number);
 
 	};
 
@@ -90,8 +91,8 @@ namespace gaia
 		std::vector<float> run_compute(vectorOfBools DNA, vectorOfFlots input) ;
 		IndexValue compute_trigger_value(vectorOfBools DNA, vectorOfFlots input);
 	};
-	std::vector<BrainNode> normaleze(brainNodeVector nodsIn); //TODO: implamant
-	std::vector<BrainNode> ad_to_nodes(float number, ve)
+	brainNodeVector normaleze(brainNodeVector nodsIn); 
+	brainNodeVector add_number_to_nodes(gaia::BrainNode inNode, brainNodeVector inVector);
 	template <class Type>
 	std::vector<Type> erase_move_n(std::vector<Type> vector, size_t n) // todo test
 	{
