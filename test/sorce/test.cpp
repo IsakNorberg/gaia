@@ -280,7 +280,7 @@ namespace gaia
 		}
 		TEST(BrainRun, calculateCorectly)
 		{
-			//todo: beter test
+			//todo: beter test and test the whole compute and du a test on the out pute			
 			Individual i({ 3,5,5,4 });
 
 			gaia::NodeSetUp setUp = gaia::NodeSetUp({ 3,5,5,4 });
