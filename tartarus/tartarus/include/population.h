@@ -21,6 +21,12 @@ namespace gaia
 		Reproduction _attribute;
 		NodeSetUp _nodeSetUp;
 	}; 
+
+	struct CompleteIndevidual
+	{
+		Brain _brain;
+		Individual _individual;
+	};
 	
 	
 	class Population //TODO: implament
@@ -29,6 +35,8 @@ namespace gaia
 		Brain _brain;
 	public:
 		Population(PopulationBluprint bluePrint); 
+		CompleteIndevidual run_compute(bool run(vectorOfFlots), float evaluate());
+
 		//run_cumpute pre indevidual till one predicet is dune then set fitnes unig a other predicet
 		// then ovelode one that is the same but only a predicet for setting fitnses and uses the first one but 
 		// the first predicet is set to return true	so it only runs once	

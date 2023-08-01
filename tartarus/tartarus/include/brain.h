@@ -1,7 +1,7 @@
 #pragma once
 
 #include "random.h"
-#include <ranges>
+#include <algorithm>
 using IndexValue = std::pair<uint, float>;
 using vectorOfBools = std::vector<bool>;
 using vectorOfFlots = std::vector<float>;
@@ -97,8 +97,7 @@ namespace gaia
 	template <class Type>
 	std::vector<Type> erase_move_n(std::vector<Type> vector, size_t n) // todo test
 	{
-		auto it = std::rotate(vector.begin(), vector.begin() + n, vector.end());
-		vector.erase(it);
+		vector.erase(vector.begin(), vector.begin() + n);
 		return vector;
 	};
 	

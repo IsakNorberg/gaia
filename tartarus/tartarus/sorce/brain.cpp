@@ -205,14 +205,20 @@ vectorOfBools gaia::NeuralNet::set_input_nodes(vectorOfBools nodeConactions)
 
 vectorOfBools gaia::NeuralNet::set_hidden_nodes(vectorOfBools nodeConactions)
 {
-	for (std::vector<BrainNode>& hiddenNodeLayer : _hiddenNodes)
+	for (size_t i = 0; i < _hiddenNodes.size(); i++)
 	{
-		for (BrainNode& node : hiddenNodeLayer)
+		
+		for (BrainNode& node : _hiddenNodes[i])
 		{
+			size_t amount = node.size();
+			if (i == _hiddenNodes.size() - 1)
+			{
+				amount = _outputNodes.size();
+			}
 			vectorOfBools temp;
-			std::copy_n(nodeConactions.begin(), node.size(), std::back_inserter(temp));
+			std::copy_n(nodeConactions.begin(), amount, std::back_inserter(temp));
 			node.set_conections(temp);
-			nodeConactions = gaia::erase_move_n(nodeConactions, node.size());
+			nodeConactions = gaia::erase_move_n(nodeConactions, amount);
 		}
 	}
 	return nodeConactions;
@@ -221,7 +227,7 @@ vectorOfBools gaia::NeuralNet::set_hidden_nodes(vectorOfBools nodeConactions)
 
 void gaia::NeuralNet::calculate_hidden_to_hidden() 
 {
-	for (size_t i = 0; i < _hiddenNodes.size()+1; i++)
+	for (size_t i = 0; i < _hiddenNodes.size()-1; i++)
 	{
 		std::vector<BrainNode> currentNodes = _hiddenNodes.at(i);
 		std::vector<BrainNode> nextNodes = _hiddenNodes.at(i+1);
