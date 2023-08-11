@@ -14,6 +14,12 @@ namespace gaia
 		Mating
 	};
 
+	struct PopulationRunOutput
+	{
+		bool _continue;
+		vectorOfBools _output;
+	};
+
 	struct PopulationBluprint
 	{
 		double _survivorRatio;
@@ -35,7 +41,7 @@ namespace gaia
 		Brain _brain;
 	public:
 		Population(PopulationBluprint bluePrint); 
-		CompleteIndevidual run_compute(bool run(vectorOfFlots), float evaluate());
+		CompleteIndevidual run_compute(vectorOfFlots firtInput, PopulationRunOutput run(vectorOfFlots), float evaluate());
 
 		//run_cumpute pre indevidual till one predicet is dune then set fitnes unig a other predicet
 		// then ovelode one that is the same but only a predicet for setting fitnses and uses the first one but 
