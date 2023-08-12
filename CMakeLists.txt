@@ -1,0 +1,63 @@
+cmake_minimum_required(VERSION 3.24)
+project(gaia)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(packages)
+include_directories(packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7)
+include_directories(packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build)
+include_directories(packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native)
+include_directories(packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include)
+include_directories(packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest)
+include_directories(packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal)
+include_directories(packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/custom)
+include_directories(tartarus/tartarus/include)
+include_directories(test)
+include_directories(test/build)
+include_directories(test/build/gaia)
+include_directories(test/build/gaia/debug)
+include_directories(test/include)
+
+add_executable(gaia
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/custom/gtest-port.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/custom/gtest-printers.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/custom/gtest.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-death-test-internal.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-filepath.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-internal.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-linked_ptr.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-param-util-generated.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-param-util.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-port-arch.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-port.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-string.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-tuple.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/internal/gtest-type-util.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-death-test.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-message.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-param-test.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-printers.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-spi.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-test-part.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest-typed-test.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest_pred_impl.h
+        packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7/build/native/include/gtest/gtest_prod.h
+        tartarus/tartarus/include/brain.h
+        tartarus/tartarus/include/dynamicIndividual.h
+        tartarus/tartarus/include/framework.h
+        tartarus/tartarus/include/Individual.h
+        tartarus/tartarus/include/population.h
+        tartarus/tartarus/include/random.h
+        tartarus/tartarus/include/setings.h
+        tartarus/tartarus/include/tartarus.h
+        tartarus/tartarus/sorce/brain.cpp
+        tartarus/tartarus/sorce/dynamicIndividual.cpp
+        tartarus/tartarus/sorce/Individual.cpp
+        tartarus/tartarus/sorce/population.cpp
+        tartarus/tartarus/sorce/random.cpp
+        tartarus/tartarus/sorce/tartarus.cpp
+        test/build/gaia/debug/pch.pch
+        test/include/pch.h
+        test/sorce/test.cpp
+        test/pch.pch)

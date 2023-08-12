@@ -1,7 +1,10 @@
 #pragma once
 
 #include "random.h"
+#include <algorithm>
 using IndexValue = std::pair<uint, float>;
+using vectorOfBools = std::vector<bool>;
+using vectorOfFlots = std::vector<float>;
 
 namespace gaia
 {
@@ -19,14 +22,18 @@ namespace gaia
 
 	class BrainNode
 	{
-		float _value{ 0 };
-		std::vector<bool> connections;
+		float _value{ 0.f };
+		vectorOfBools _connections;
 	public:
-		float getValue() const;
-		void setValue(float newValue);
+		float get_value() const noexcept;
+		void set_value(float newValue) noexcept;
 		bool operator[](size_t index);
-		std::vector<bool> set_conections(std::vector<bool> DNA); // todo use dif and macke tis: impl- is run over the amunt of conections an set then return the DNA used up
+		vectorOfBools get_DNA() const noexcept;
+		void set_conections(vectorOfBools DNA);
 		void resize(uint size);
+		size_t size() const noexcept;
+		void add_value(float number);
+
 	};
 
 	class NeuralNet
@@ -39,13 +46,17 @@ namespace gaia
 		void set_hidden_node_layers(uint amount);
 		void set_hidden_node_breadth(uint amount);
 
-		std::vector<bool> set_input_nodes(std::vector<bool> nodeConactions);
-		std::vector<bool> set_hidden_nodes(std::vector<bool> nodeConactions);
-		void set_output_nodes(std::vector<bool> nodeConactions);
+		void calculate_hidden_to_hidden();
+		vectorOfFlots calculade_hidden_to_out();
+		void calculate_in_to_hidden(vectorOfFlots input);
+
+		vectorOfBools set_input_nodes(vectorOfBools nodeConactions);
+		vectorOfBools set_hidden_nodes(vectorOfBools nodeConactions);
 	public:
+		vectorOfFlots run(vectorOfFlots input);
 		NeuralNet(NodeSetUp setUp);
-		void set_nods(std::vector<bool> DNA);
-		std::vector<bool> get_set_DNA() const;
+		void set_nods(vectorOfBools DNA);
+		vectorOfBools get_set_DNA() const;
 	};
 
 	enum class Negativity
@@ -67,26 +78,27 @@ namespace gaia
 		uint _hiddenNodeLayers{ 0 };
 		uint _outputNodeAmount{ 0 };
 		Negativity _attribute;
-		std::vector<float> _input;
+		vectorOfFlots _input;
 		NeuralNet _nerualNet;
-		std::vector<bool> get_dna_from_net();
+		vectorOfBools get_dna_from_net();
+		void verify_DNA(vectorOfBools DNA);
+		void seed_neural_net(vectorOfBools DNA);
 
 	public:
 		Brain(BrainBluePrint bluePrint);
 		NodeSetUp get_node_set_up()const noexcept;
-		void seed_neural_net(std::vector<bool> DNA) noexcept;
-		void set_input(std::vector<float> input) noexcept;
-		std::vector<float> run_compute(std::vector<bool> DNA) const noexcept;
-		IndexValue compute_trigger_value(std::vector<bool> DNA) const noexcept;
-		bool verify_DNA(std::vector<bool> DNA);
+		void set_input(vectorOfFlots input) noexcept;
+		std::vector<float> run_compute(vectorOfBools DNA, vectorOfFlots input) ;
+		IndexValue compute_trigger_value(vectorOfBools DNA, vectorOfFlots input);
 	};
-	std::vector<BrainNode> normaleze(std::vector<gaia::BrainNode> nodsIn); //TODO: implamant
-
+	
+	std::vector<BrainNode> normaleze(std::vector<BrainNode> nodsIn); 
+	std::vector<BrainNode> add_number_to_nodes(gaia::BrainNode inNode, std::vector<BrainNode> inVector);
 	template <class Type>
 	std::vector<Type> erase_move_n(std::vector<Type> vector, size_t n) // todo test
 	{
-		auto it = std::rotate(vector.begin(), vector.begin() + n, vector.end());
-		vector.erase(it);
+		vector.erase(vector.begin(), vector.begin() + n);
 		return vector;
 	};
+	
 }

@@ -4,8 +4,6 @@
 #include <algorithm>
 namespace gaia
 {
-
-
 	namespace Bacic
 	{ 
 		TEST(BasictTests, IncludeCorectly)
@@ -62,7 +60,6 @@ namespace gaia
 		}
 		TEST(GetRandomUnique, TheNumbersAreUniqe)
 		{
-
 			int s = 8;
 			std::vector<int> vector = { 2,5,1,8,9,3,4,99,7,88 };
 			vector = get_random_range_unique<int>(s,vector);
@@ -246,26 +243,54 @@ namespace gaia
 			EXPECT_TRUE(3 == test._hiddenNodeLayers);
 			EXPECT_TRUE(2 == test._outputNodeAmount);
 		}
+
 		TEST(BrinSetUp, TestTheNormalize)
 		{
 			gaia::BrainNode n0;
-			n0.setValue(50.00f);
+			n0.set_value(50.00f);
 			gaia::BrainNode n1;
-			n1.setValue(100.00f);
+			n1.set_value(100.00f);
 			gaia::BrainNode n2;
-			n2.setValue(25.00f);
+			n2.set_value(25.00f);
 			std::vector<BrainNode> vector = { n0,n1,n2 };
-			auto testVector = gaia::normaleze(vector);
-			EXPECT_TRUE(testVector.at(0).getValue() == 0.5f);
-			EXPECT_TRUE(testVector.at(1).getValue() == 1.0f);
-			EXPECT_TRUE(testVector.at(2).getValue() == 0.25f);
-			
+			std::vector<BrainNode> testVector = gaia::normaleze(vector);
+			EXPECT_TRUE(testVector.at(0).get_value() == 0.5f);
+			EXPECT_TRUE(testVector.at(1).get_value() == 1.0f);
+			EXPECT_TRUE(testVector.at(2).get_value() == 0.25f);
 		}
 		TEST(BrinSetUp, itSeedsDNACorectly)
-		{
+	    {
+			Individual i({ 3,5,5,4 });
 
-			//TODO: IMplement
+			gaia::NodeSetUp setUp = gaia::NodeSetUp({ 3,5,5,4 });
+			gaia::Negativity negativety = gaia::Negativity::Positive;
+			gaia::BrainBluePrint bluprint = gaia::BrainBluePrint{ setUp,negativety };
+
+			gaia::Brain brain = gaia::Brain(bluprint);
+
+			try
+			{
+				brain.run_compute(i.get_DNA(), { 0.5f,0.7f,0.9f });
+			}
+			catch (const std::runtime_error&)
+			{
+				EXPECT_FALSE(true);
+			}
+			EXPECT_FALSE(false);
 		}
+		TEST(BrainRun, calculateCorectly)
+		{
+			//todo: beter test and test the whole compute and du a test on the out pute			
+			Individual i({ 3,5,5,4 });
 
+			gaia::NodeSetUp setUp = gaia::NodeSetUp({ 3,5,5,4 });
+			gaia::Negativity negativety = gaia::Negativity::Positive;
+			gaia::BrainBluePrint bluprint = gaia::BrainBluePrint{ setUp,negativety };
+
+			gaia::Brain brain = gaia::Brain(bluprint);
+
+			brain.run_compute(i.get_DNA(), { 0.5f,0.7f,0.9f });
+			EXPECT_FALSE(false);
+		}
 	}
 }

@@ -49,7 +49,6 @@ namespace gaia
 		return static_cast<uint>(random(range));
 	}
 
-
 	float get_random_range_normalized_posetiv(uint precision) noexcept
 	{
 		assert(precision > 0);
@@ -74,5 +73,4 @@ namespace gaia
 	{
 		TEST = test;
 	}
-
 }
