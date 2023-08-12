@@ -1,5 +1,4 @@
 #include "pch.h"
-
 #include "tartarus.h"
 #include <algorithm>
 namespace gaia

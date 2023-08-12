@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.24)
 project(gaia)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
 include_directories(packages)
 include_directories(packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.7)

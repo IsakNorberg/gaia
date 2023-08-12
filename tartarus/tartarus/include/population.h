@@ -17,7 +17,7 @@ namespace gaia
 	struct PopulationRunOutput
 	{
 		bool _continue;
-		vectorOfBools _output;
+		vectorOfFlots _output;
 	};
 
 	struct PopulationBluprint
