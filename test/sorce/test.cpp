@@ -1,5 +1,6 @@
-#include "pch.h"
+
 #include "tartarus.h"
+#include "gtest/gtest.h"
 #include <algorithm>
 namespace gaia
 {
@@ -148,6 +149,7 @@ namespace gaia
 			
 			EXPECT_TRUE(test1._completSet.size() == test.size());
 		}
+
 		TEST(TestDynamicIndividual, TheSizeIsCorrect)
 		{
 			std::vector<int> test = { 4,9,3,7,4,5,9,55 };

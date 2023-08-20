@@ -33,7 +33,7 @@ git
 
 #folders
 .vs/
-tartarus/tartarus/build/
+tartarus/build/
 test/x64/
 test/build/
 
