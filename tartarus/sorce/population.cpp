@@ -5,24 +5,28 @@ gaia::Population::Population(PopulationBluprint bluePrint): _brain({ bluePrint._
 	std::generate_n(_generation.begin(), bluePrint._size, [&]() {return Individual(bluePrint._nodeSetUp); });
 }
 
-gaia::CompleteIndevidual gaia::Population::run_compute(vectorOfFlots firtInput, PopulationRunOutput run(vectorOfFlots), float evaluate())
+gaia::CompleteIndevidual gaia::Population::run_compute(vectorOfFlots fiertInput, PopulationRunOutput run(vectorOfFlots, uint), float evaluate(uint))
 {
-	vectorOfFlots input = firtInput;
+	vectorOfFlots input = fiertInput;
 	bool myContinue;
 	for (size_t i = 0; i < _generation.size();)
 	{
 		vectorOfFlots runOutput = _brain.run_compute(_generation[i].get_DNA(), input);
-		auto out = run(runOutput);
+		auto out = run(runOutput, i);
 		input = out._output;
 		myContinue = out._continue;
 
 		if (myContinue)
 		{
-			_generation[i].set_fitness(evaluate());
+			_generation[i].set_fitness(evaluate(i));
 			i++;
 		}
 	}
-	// todo set fitnes tex sätter fösta input sen storar vad resultatet blir av förta inbut och evaluate callar de värdet
-	//test
+    std::sort(_generation.begin(), _generation.end(), [](Individual lh, Individual rh)
+    {
+        return lh.get_fitness() > rh.get_fitness();
+    });
 	return { _brain,_generation.at(0) };
+
+    //TODO:test population
 }

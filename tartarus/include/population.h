@@ -2,6 +2,7 @@
 #include "setings.h"
 #include "Individual.h"
 
+#include <algorithm>
 #include <ranges>
 #include <vector>
 
@@ -41,8 +42,9 @@ namespace gaia
 		Brain _brain;
 	public:
 		Population(PopulationBluprint bluePrint); 
-		CompleteIndevidual run_compute(vectorOfFlots firtInput, PopulationRunOutput run(vectorOfFlots), float evaluate());
-
+		CompleteIndevidual run_compute(vectorOfFlots indevidual, PopulationRunOutput run(vectorOfFlots, uint), float evaluate(uint));
+        void purge();
+        void mate();
 		//run_cumpute pre indevidual till one predicet is dune then set fitnes unig a other predicet
 		// then ovelode one that is the same but only a predicet for setting fitnses and uses the first one but 
 		// the first predicet is set to return true	so it only runs once	
